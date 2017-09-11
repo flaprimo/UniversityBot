@@ -1,0 +1,115 @@
+# Italian translations for UNIVERSITY BOT package.
+# Copyright (C) 2017 Flavio Primo
+# This file is distributed under the same license as the UNIVERSITY BOT package.
+# Flavio Primo <fla.primo.engineer@outlook.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: UNIVERSITY BOT 1.0\n"
+"Report-Msgid-Bugs-To: project's issue github page\n"
+"POT-Creation-Date: 2017-09-10 11:02+0200\n"
+"PO-Revision-Date: 2017-09-10 18:02+0200\n"
+"Last-Translator: Flavio Primo <fla.primo.engineer@outlook.com>\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.1\n"
+
+#: lib/Commands/Start.py:36
+msgid "Hi "
+msgstr "Ciao "
+
+#: lib/Commands/Start.py:37
+msgid "I'm here to help you survive at Politecnico di Milano (or at least I try),\n"
+msgstr "Sono qui per aiutarti a sopravvivere al Politecnico di Milano (o almeno ci provo),\n"
+
+#: lib/Commands/Start.py:38
+msgid "to know what I can do for you just ask for some /help !"
+msgstr "per sapere come posso aiutarti chiedi /help !"
+
+#: lib/Commands/Info.py:36
+msgid "Here I proudly present my parents!\n"
+msgstr "Ti presento con orgoglio i miei genitori\\!\n"
+
+#: lib/Commands/Info.py:37
+msgid "You can follow his ramblings here https://flavioprimo.xyz/"
+msgstr "Puoi seguire i suoi vaneggiamenti su https://flavioprimo.xyz/"
+
+#: lib/Commands/Help.py:36
+msgid "Here's a list of the available commands:\n"
+msgstr "Lista dei comandi disponibili\n"
+
+#: lib/Commands/Help.py:37
+msgid "Search for available classrooms\n"
+msgstr "Cerca aule libere\n"
+
+#: lib/Commands/Help.py:38
+msgid "Show how I can help you\n"
+msgstr "Ti mostro come posso aiutarti\n"
+
+#: lib/Commands/Help.py:39
+msgid "Get to know my parents\n"
+msgstr "Conosci i miei genitori\n"
+
+#: lib/Commands/FreeClassrooms.py:77
+msgid ""
+"Let's search for free classrooms!\n"
+"Select start time hour"
+msgstr ""
+"Cerchiamo aule libere!\n"
+"Seleziona l'ora dell'orario di inizio"
+
+#: lib/Commands/FreeClassrooms.py:89
+msgid "Select start time minutes"
+msgstr "Seleziona i minuti dell'orario di inizio"
+
+#: lib/Commands/FreeClassrooms.py:101
+msgid "Select end time hour"
+msgstr "Seleziona l'ora dell'orario di fine"
+
+#: lib/Commands/FreeClassrooms.py:113
+msgid "Select end time minutes"
+msgstr "Seleziona i minuti dell'orario di fine"
+
+#: lib/Commands/FreeClassrooms.py:125
+msgid "Select day"
+msgstr "Seleziona giorno"
+
+#: lib/Commands/FreeClassrooms.py:150
+msgid "Free classrooms for *"
+msgstr "Aule libere *"
+
+#: lib/Commands/FreeClassrooms.py:151
+msgid "* from *"
+msgstr "* da *"
+
+#: lib/Commands/FreeClassrooms.py:152
+msgid "* to *"
+msgstr "* a *"
+
+#: lib/Commands/FreeClassrooms.py:153
+msgid "* are:\n"
+msgstr "* sono:\n"
+
+#: lib/Commands/FreeClassrooms.py:160
+msgid "I'm sorry, but it seems like Politecnico has some difficulties, "
+msgstr "Mi dispiace, ma sembra che il Politecnico stia avendo alcune difficolta', "
+
+#: lib/Commands/FreeClassrooms.py:161
+msgid "not my fault! (pinky swear)"
+msgstr "non e' colpa mia giuro!"
+
+#: lib/Commands/FreeClassrooms.py:164
+msgid "I'm sorry, but it seems like you didn't enter an end time which is"
+msgstr "Mi dispiace, ma sembra che tu non abbia inserito un orario di fine che sia"
+
+#: lib/Commands/FreeClassrooms.py:165
+msgid " greater than the start time, not my fault!"
+msgstr " maggiore dell'orario di inizio, non e' colpa mia!"
+
+#: lib/Commands/FreeClassrooms.py:179
+msgid "Bye! I hope we can talk again some day."
+msgstr "Ciao! Spero di esserti utile ancora."
