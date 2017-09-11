@@ -7,4 +7,5 @@ It's a work in progress so the code is a bit messed up, but it works!
 * use of the tested and reliable [Python Telegram Bot](https://github.com/python-telegram-bot/python-telegram-bot) framework
 
 ## Credits
-Flavio Primo ([@flaprimo](https://github.com/flaprimo/))
+* Flavio Primo ([@flaprimo](https://github.com/flaprimo/))
+* Paolo Paterna ([@TopoDiFogna](https://github.com/TopoDiFogna))
