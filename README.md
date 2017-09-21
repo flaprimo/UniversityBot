@@ -1,4 +1,6 @@
 # UniversityBot
+<a href='https://travis-ci.org/flaprimo/UniversityBot'><img src='https://secure.travis-ci.org/flaprimo/UniversityBot.png?branch=master'></a>
+
 It's a work in progress so the code is a bit messed up, but it works!
 
 ## Features
