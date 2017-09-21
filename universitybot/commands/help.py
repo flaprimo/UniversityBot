@@ -12,7 +12,7 @@ class Help:
         # Add command to the dispatcher
         dispatcher.add_handler(CommandHandler("help", help))
 
-        logger.info("Added Help command to Telegram handler")
+        logger.info("Added /help command to Telegram handler")
 
 
 '''
@@ -34,6 +34,6 @@ def help(bot, update):
 
     translate(user['language_code'])
     update.message.reply_text(_('Here\'s a list of the available commands:\n') +
-                              '/freeclassrooms - ' + _('Search for available classrooms\n') +
+                              '/provider - ' + _('Search for available classrooms\n') +
                               '/help - ' + _('Show how I can help you\n') +
                               '/info - ' + _('Get to know my parents\n'))

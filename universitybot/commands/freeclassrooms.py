@@ -3,7 +3,7 @@ import logging
 import telegram
 from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove)
 from telegram.ext import (CommandHandler, RegexHandler, ConversationHandler)
-from universitybot.freeclassrooms.FreeClassroomsPolimi import FreeClassroomsPolimi
+from universitybot.providers.freeclassrooms import FreeClassroomsProvider
 from universitybot.translation import translate
 
 
@@ -34,7 +34,7 @@ class FreeClassrooms:
 
         dispatcher.add_handler(conv_handler)
 
-        logger.info("Added freeclassrooms command to Telegram handler")
+        logger.info("Added /freeclassrooms command to Telegram handler")
 
 
 '''
@@ -150,7 +150,9 @@ def select_day(bot, update, user_data):
 
     if endtime > starttime:
         try:
-            free_classrooms = FreeClassroomsPolimi.get_free_classrooms(day, starttime, endtime)
+            logger.info("%s completed successfully /classroom command" % user.first_name)
+
+            free_classrooms = FreeClassroomsProvider.get_free_classrooms('MIA', day, starttime, endtime)
 
             update.message.reply_text(_('Free classrooms for *') + user_data['day'] + ' ' + day.strftime('%Y-%m-%d') +
                                       _('* from *') + starttime.strftime('%H:%M') +

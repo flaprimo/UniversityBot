@@ -12,7 +12,7 @@ class Start:
         # Add command to the dispatcher
         dispatcher.add_handler(CommandHandler("start", start))
 
-        logger.info("Added Start command to Telegram handler")
+        logger.info("Added /start command to Telegram handler")
 
 
 '''
@@ -34,5 +34,5 @@ def start(bot, update):
     translate(user['language_code'])
 
     update.message.reply_text(_('Hi ') + user.first_name + '!\n' +
-                              _('I\'m here to help you survive at Politecnico di Milano (or at least I try),\n') +
-                              _('to know what I can do for you just ask for some /help !'))
+                              _('I\'m here to help you survive at Politecnico di Milano (or at least I try),\n'
+                                'to know what I can do for you just ask for some /help !'))

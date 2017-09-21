@@ -1,1 +1,0 @@
-from universitybot.freeclassrooms import FreeClassroomsPolimi

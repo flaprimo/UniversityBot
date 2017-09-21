@@ -12,7 +12,7 @@ class Info:
         # Add command to the dispatcher
         dispatcher.add_handler(CommandHandler("info", info))
 
-        logger.info("Added Info command to Telegram handler")
+        logger.info("Added /info command to Telegram handler")
 
 
 '''
@@ -35,4 +35,5 @@ def info(bot, update):
     translate(user['language_code'])
 
     update.message.reply_text(_('Here I proudly present my parents!\n') +
-                              'Flavio Primo - ' + _('You can follow his ramblings here https://flavioprimo.xyz/'))
+                              'Flavio Primo - ' + _('You can follow his ramblings here https://flavioprimo.xyz/') +
+                              'Paolo Paterna - ' + _('You can follow his ramblings here https://flavioprimo.xyz/'))
