@@ -3,10 +3,10 @@
 import json
 import logging
 from telegram.ext import Updater
-from lib.Commands.Start import Start
-from lib.Commands.Help import Help
-from lib.Commands.Info import Info
-from lib.Commands.FreeClassrooms import FreeClassrooms
+from universitybot.commands.start import Start
+from universitybot.commands.help import Help
+from universitybot.commands.info import Info
+from universitybot.commands.freeclassrooms import FreeClassrooms
 
 # Logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -23,7 +23,7 @@ def error(bot, update, error):
 
 def main():
     # Load configuration file
-    with open('etc/conf.test.json') as json_data_file:
+    with open('conf/conf.test.json') as json_data_file:
         conf = json.load(json_data_file)
 
     # Create the EventHandler and pass it your bot's token.

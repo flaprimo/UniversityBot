@@ -1,1 +1,0 @@
-from lib.Commands import Start, Help, Info, FreeClassrooms
