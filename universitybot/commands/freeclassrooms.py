@@ -152,7 +152,7 @@ def select_day(bot, update, user_data):
         try:
             logger.info("%s completed successfully /classroom command" % user.first_name)
 
-            free_classrooms = FreeClassroomsProvider.get_free_classrooms('MIA', day, starttime, endtime)
+            free_classrooms = FreeClassroomsProvider.get_freeclassrooms('MIA', day, starttime, endtime)
 
             update.message.reply_text(_('Free classrooms for *') + user_data['day'] + ' ' + day.strftime('%Y-%m-%d') +
                                       _('* from *') + starttime.strftime('%H:%M') +
@@ -161,8 +161,8 @@ def select_day(bot, update, user_data):
                                       reply_markup=ReplyKeyboardRemove(),
                                       parse_mode=telegram.ParseMode.MARKDOWN)
 
-        except:
-            logger.error("Politecnico di Milano server seems not responding")
+        except ConnectionError:
+            logger.error("Information provider server seems not responding")
 
             update.message.reply_text(_('I\'m sorry, but it seems like Politecnico has some difficulties, ') +
                                       _('not my fault! (pinky swear)'),

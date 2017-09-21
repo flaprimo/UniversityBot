@@ -1,6 +1,5 @@
-import requests
-import json
 from itertools import groupby
+from universitybot.providers.polimi_api import PolimiAPI
 
 
 class FreeClassroomsProvider:
@@ -8,45 +7,31 @@ class FreeClassroomsProvider:
     Search for free classrooms at Politecnico di Milano
     """
     @staticmethod
-    def get_free_classrooms(location, date, start_time, end_time):
-        url = 'https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/elencoAule/{}'.format(location)
+    def get_freeclassrooms(location, date, start_time, end_time):
+        try:
+            freeclassrooms_json = PolimiAPI.get_elenco_aule_libere(location, date, start_time, end_time)
 
-        payload = 'soloAuleLibere={}&dalleAulaLibera={}&alleAulaLibera={}&dataAulaLibera={}'\
-            .format('S', start_time.strftime('%H:%M'), end_time.strftime('%H:%M'), date.strftime('%d/%m/%Y'))
+            classroom_type_filter = ['DEPARTMENTAL CLASSROOM', 'CONFERENCE ROOM', 'AUDITORIUM', 'MASTER CLASSROOM']
 
-        response = requests.get(url=url, params=payload)
+            # get tuple list of classrooms
+            classroom_list = []
+            for classroom in freeclassrooms_json:
+                if classroom['categoria'] not in classroom_type_filter:
+                    (location, address) = classroom['dove'].split(', ')
+                    classroom_list.append((address, classroom['sigla']))
 
-        # print(response.url)
-
-        if response.ok:
-            classrooms_json = json.loads(response.text)
-
-            classrooms = FreeClassroomsProvider._parse_response(classrooms_json)
+            # group classrooms by address
+            classrooms = []
+            for address, classroom_names in groupby(classroom_list, lambda x: x[0]):
+                names_list = []
+                for classroom_name in classroom_names:
+                    names_list.append(classroom_name[1])
+                classrooms.append((address, names_list))
 
             return FreeClassroomsProvider._to_string(classrooms)
-        else:
-            response.raise_for_status()
 
-    @staticmethod
-    def _parse_response(classrooms_json):
-        classroom_type_filter = ['DEPARTMENTAL CLASSROOM', 'CONFERENCE ROOM', 'AUDITORIUM', 'MASTER CLASSROOM']
-
-        # get tuple list of classrooms
-        classroom_list = []
-        for classroom in classrooms_json:
-            if classroom['categoria'] not in classroom_type_filter:
-                (location, address) = classroom['dove'].split(', ')
-                classroom_list.append((address, classroom['sigla']))
-
-        # group classrooms by address
-        classrooms = []
-        for address, classroom_names in groupby(classroom_list, lambda x: x[0]):
-            names_list = []
-            for classroom_name in classroom_names:
-                names_list.append(classroom_name[1])
-            classrooms.append((address, names_list))
-
-        return classrooms
+        except:
+            raise ConnectionError('Politecnico di Milano server seems not responding')
 
     @staticmethod
     def _to_string(freeclassrooms_list):
