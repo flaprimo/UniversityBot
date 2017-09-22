@@ -2,19 +2,36 @@ from datetime import datetime
 import requests
 import json
 
-'''
-Polimi TODO APIs:
-
-* https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/ricerca_rubrica/
-* https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/dettaglioAula/{id_aula}
-* https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/contatti/{id_persona}
-* https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/docente/{id_persona}/foto/
-'''
-
 
 class PolimiAPI:
     """
-    Provide Politecnico di Milano APIs
+    Provides Politecnico di Milano APIs
+
+    API summary (of working apis):
+    * get_elenco_aule(sede)
+      Returns a list of the classrooms from a location (sede) in Politecnico di Milano.
+      returns: [{"id_aula": int, "sigla": str, "categoria": str, "dove": str, "aula_studio": char}, [...]]
+
+    * get_ricerca_rubrica()
+      Returns a list of the staff of Politecnico di Milano.
+      returns: [{"id_persona": int, "n_persona": str},[...]]
+
+    * get_dettaglio_aula(id_aula)
+      Returns the details of a classrooms in Politecnico di Milano.
+      returns: [{"id_aula": int, "sigla": str, "categoria": str, "dove": str}]
+
+    * get_contatti(id_persona)
+      Returns the details of a person staff in Politecnico di Milano.
+      returns: [{"id_persona": int, "n_persona": str, "mail": str, "lista_telefono_ufficio": [str]}]
+
+    * get_elenco_sedi()
+      Returns a list of the locations (sede) in Politecnico di Milano.
+      returns: [{"cod_sede": str, "desc_sede": str, "nome": str, "csis": str, "lat": str, "lng": str}, [...]]
+
+    * get_elenco_aule_libere(sede, date, start_time, end_time)
+      Returns a list of the free classrooms in Politecnico di Milano given constraints.
+      return: [{"id_aula": int, "sigla": str, "categoria": str, "dove": str, "aula_studio": char}, [...]]
+
     """
 
     base_url = 'https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/'
@@ -33,50 +50,10 @@ class PolimiAPI:
             response.raise_for_status()
 
     @staticmethod
-    def get_elenco_servizi_shell(matricola):
-        """
-        Not working.
-
-        Parameters
-        ----------
-        matricola : str
-            matricola of a person.
-
-        Returns
-        -------
-        dict
-            unknown
-
-        Examples
-        --------
-        Excerpt of a returned JSON:
-        [
-           {
-              "id_servizio":1,
-              "nome_servizio":"Contacts",
-              "badge":0
-           },
-           {
-              "id_servizio":2,
-              "nome_servizio":"Search Rooms",
-              "badge":0
-           },
-           {
-              "id_servizio":5,
-              "nome_servizio":"Registrar's Office Queue",
-              "badge":0
-           }
-        ]
-
-        """
-        url = PolimiAPI.base_url + 'elencoServiziShell/{}'.format(matricola)
-
-        return PolimiAPI._get_response(url)
-
-    @staticmethod
     def get_elenco_aule(sede):
         """
         Returns a list of the classrooms from a location (sede) in Politecnico di Milano.
+        GET: https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/elencoAule/{sede}
 
         Parameters
         ----------
@@ -117,9 +94,111 @@ class PolimiAPI:
         return PolimiAPI._get_response(url)
 
     @staticmethod
+    def get_ricerca_rubrica():
+        """
+        Returns a list of the staff of Politecnico di Milano.
+        GET: https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/ricerca_rubrica/
+
+        Returns
+        -------
+        dict
+            staff of Politecnico di Milano
+
+        Examples
+        --------
+        Excerpt of a returned JSON:
+        [
+            {
+                "id_persona": 252772,
+                "n_persona": "Abate Stefano Cesare Cornelio"
+            },
+            {
+                "id_persona": 252797,
+                "n_persona": "Abba' Antonella"
+            },
+            [...]
+        ]
+
+        """
+        url = PolimiAPI.base_url + 'ricerca_rubrica/'
+
+        return PolimiAPI._get_response(url)
+
+    @staticmethod
+    def get_dettaglio_aula(id_aula):
+        """
+        Returns the details of a classrooms in Politecnico di Milano.
+        GET: https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/dettaglioAula/{id_aula}
+
+        Parameters
+        ----------
+        id_aula : str
+            classroom id of Politecnico di Milano.
+            accepted strings can be taken from get_elenco_aule(sede)
+
+        Returns
+        -------
+        dict
+            details about a classroom in Politecnico di Milano
+
+        Examples
+        --------
+        Excerpt of a returned JSON:
+        [
+            {
+              "id_aula": 1,
+              "sigla": "A.1.1",
+              "categoria": "TEACHING ROOM",
+              "dove": "Milano Citt\u00e0 Studi"
+            }
+        ]
+
+        """
+        url = PolimiAPI.base_url + 'dettaglioAula/{}'.format(id_aula)
+
+        return PolimiAPI._get_response(url)
+
+    @staticmethod
+    def get_contatti(id_persona):
+        """
+        Returns the details of a person staff in Politecnico di Milano.
+        GET: https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/contatti/{id_persona}
+
+        Parameters
+        ----------
+        id_persona : str
+            person staff id of Politecnico di Milano.
+            accepted strings can be taken from get_ricerca_rubrica()
+
+        Returns
+        -------
+        dict
+            details about a person staff in Politecnico di Milano
+
+        Examples
+        --------
+        Excerpt of a returned JSON:
+        [
+          {
+            "id_persona": 2612,
+            "n_persona": "Tiano Katia",
+            "mail": "katia.tiano@polimi.it",
+            "lista_telefono_ufficio": [
+              "6094"
+            ]
+          }
+        ]
+
+        """
+        url = PolimiAPI.base_url + 'contatti/{}'.format(id_persona)
+
+        return PolimiAPI._get_response(url)
+
+    @staticmethod
     def get_elenco_sedi():
         """
         Returns a list of the locations (sede) in Politecnico di Milano.
+        GET: https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/elencoSedi/
 
         Returns
         -------
@@ -156,6 +235,8 @@ class PolimiAPI:
     def get_elenco_aule_libere(sede, date, start_time, end_time):
         """
         Returns a list of the free classrooms in Politecnico di Milano given constraints.
+        GET: https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/elencoAule/{sede}?
+            soloAuleLibere=S&dalleAulaLibera={hh:mm}&alleAulaLibera={hh:mm}&dataAulaLibera={dd/mm/yyyy}
 
         Parameters
         ----------
@@ -197,7 +278,71 @@ class PolimiAPI:
         """
         url = PolimiAPI.base_url + 'elencoAule/{}'.format(sede)
 
-        payload = 'soloAuleLibere={}&dalleAulaLibera={}&alleAulaLibera={}&dataAulaLibera={}'\
+        payload = 'soloAuleLibere={}&dalleAulaLibera={}&alleAulaLibera={}&dataAulaLibera={}' \
             .format('S', start_time.strftime('%H:%M'), end_time.strftime('%H:%M'), date.strftime('%d/%m/%Y'))
 
         return PolimiAPI._get_response(url, payload)
+
+    @staticmethod
+    def get_elenco_servizi_shell(matricola):
+        """
+        Not working.
+        GET: https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/elencoServiziShell/{matricola}
+
+        Parameters
+        ----------
+        matricola : str
+            matricola of a person.
+
+        Returns
+        -------
+        dict
+            unknown
+
+        Examples
+        --------
+        Excerpt of a returned JSON:
+        [
+           {
+              "id_servizio":1,
+              "nome_servizio":"Contacts",
+              "badge":0
+           },
+           {
+              "id_servizio":2,
+              "nome_servizio":"Search Rooms",
+              "badge":0
+           },
+           {
+              "id_servizio":5,
+              "nome_servizio":"Registrar's Office Queue",
+              "badge":0
+           }
+        ]
+
+        """
+        url = PolimiAPI.base_url + 'elencoServiziShell/{}'.format(matricola)
+
+        return PolimiAPI._get_response(url)
+
+    @staticmethod
+    def get_docente(id_persona):
+        """
+        Not working. Returns the photo of a person staff in Politecnico di Milano.
+        GET: https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/docente/{id_persona}/foto/
+
+        Parameters
+        ----------
+        id_persona : str
+            person staff id of Politecnico di Milano.
+            accepted strings can be taken from get_ricerca_rubrica()
+
+        Returns
+        -------
+        dict
+            unknown
+
+        """
+        url = PolimiAPI.base_url + 'docente/{}/foto/'.format(id_persona)
+
+        return PolimiAPI._get_response(url)
