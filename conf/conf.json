@@ -1,5 +1,13 @@
 {
     "telegram":{
-        "token":""
+        "token":"",
+        "connection":"polling",
+        "webhook":{
+            "ip":"",
+            "port":"",
+            "key":"",
+            "cert":"",
+            "url":""
+        }
     }
 }

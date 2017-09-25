@@ -30,7 +30,7 @@ COMMANDS
 def info(bot, update):
     user = update.message.from_user
 
-    logger.info("%s started info command: %s" % (user.first_name, update.message.text))
+    logger.info("%s[%s] started info command: %s" % (user.first_name, user['language_code'], update.message.text))
 
     translate(user['language_code'])
 

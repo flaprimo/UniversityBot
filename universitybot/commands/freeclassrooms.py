@@ -84,7 +84,7 @@ def select_starttime_hour(bot, update, user_data):
     user = update.message.from_user
     user_data['starttime_hour'] = update.message.text
 
-    logger.info("%s added starttime_hour: %s" % (user.first_name, update.message.text))
+    logger.info("%s[%s] added starttime_hour: %s" % (user.first_name, user['language_code'], update.message.text))
 
     translate(user['language_code'])
     update.message.reply_text(_('Select start time minutes'),
@@ -97,7 +97,7 @@ def select_starttime_min(bot, update, user_data):
     user = update.message.from_user
     user_data['starttime_min'] = update.message.text
 
-    logger.info("%s added starttime_min: %s" % (user.first_name, update.message.text))
+    logger.info("%s[%s] added starttime_min: %s" % (user.first_name, user['language_code'], update.message.text))
 
     translate(user['language_code'])
     update.message.reply_text(_('Select end time hour'),
@@ -110,7 +110,7 @@ def select_endtime_hour(bot, update, user_data):
     user = update.message.from_user
     user_data['endtime_hour'] = update.message.text
 
-    logger.info("%s added endtime_hour: %s" % (user.first_name, update.message.text))
+    logger.info("%s[%s] added endtime_hour: %s" % (user.first_name, user['language_code'], update.message.text))
 
     translate(user['language_code'])
     update.message.reply_text(_('Select end time minutes'),
@@ -123,7 +123,7 @@ def select_endtime_min(bot, update, user_data):
     user = update.message.from_user
     user_data['endtime_min'] = update.message.text
 
-    logger.info("%s added endtime_min: %s" % (user.first_name, update.message.text))
+    logger.info("%s[%s] added endtime_min: %s" % (user.first_name, user['language_code'], update.message.text))
 
     translate(user['language_code'])
     update.message.reply_text(_('Select day'),
@@ -145,12 +145,12 @@ def select_day(bot, update, user_data):
     starttime = datetime.time(int(user_data['starttime_hour']), int(user_data['starttime_min']))
     endtime = datetime.time(int(user_data['endtime_hour']), int(user_data['endtime_min']))
 
-    logger.info("%s added day: %s" % (user.first_name, update.message.text))
+    logger.info("%s[%s] added day: %s" % (user.first_name, user['language_code'], update.message.text))
     translate(user['language_code'])
 
     if endtime > starttime:
         try:
-            logger.info("%s completed successfully /classroom command" % user.first_name)
+            logger.info("%s[%s] completed successfully /classroom command" % (user.first_name, user['language_code']))
 
             free_classrooms = FreeClassroomsProvider.get_freeclassrooms('MIA', day, starttime, endtime)
 
@@ -181,7 +181,7 @@ def select_day(bot, update, user_data):
 def cancel(bot, update, user_data):
     user = update.message.from_user
 
-    logger.info("%s canceled command: %s" % (user.first_name, update.message.text))
+    logger.info("%s[%s] canceled command: %s" % (user.first_name, user['language_code'], update.message.text))
 
     translate(user['language_code'])
     update.message.reply_text(_('Bye! I hope we can talk again some day.'), reply_markup=ReplyKeyboardRemove())
