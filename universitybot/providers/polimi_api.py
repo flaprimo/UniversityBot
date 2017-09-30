@@ -1,6 +1,5 @@
 from datetime import datetime
-import requests
-import json
+from universitybot.calls.calls_manager import call
 
 
 class PolimiAPI:
@@ -35,19 +34,6 @@ class PolimiAPI:
     """
 
     base_url = 'https://m.servizionline.polimi.it/info-didattica/rest/polimimobile/'
-
-    @staticmethod
-    def _get_response(url, *payload):
-
-        if len(payload) > 0:
-            response = requests.get(url=url, params=payload[0])
-        else:
-            response = requests.get(url=url)
-
-        if response.ok:
-            return json.loads(response.text)
-        else:
-            response.raise_for_status()
 
     @staticmethod
     def get_elenco_aule(sede):
@@ -91,7 +77,7 @@ class PolimiAPI:
         """
         url = PolimiAPI.base_url + 'elencoAule/{}'.format(sede)
 
-        return PolimiAPI._get_response(url)
+        return call(url)
 
     @staticmethod
     def get_ricerca_rubrica():
@@ -122,7 +108,7 @@ class PolimiAPI:
         """
         url = PolimiAPI.base_url + 'ricerca_rubrica/'
 
-        return PolimiAPI._get_response(url)
+        return call(url)
 
     @staticmethod
     def get_dettaglio_aula(id_aula):
@@ -156,7 +142,7 @@ class PolimiAPI:
         """
         url = PolimiAPI.base_url + 'dettaglioAula/{}'.format(id_aula)
 
-        return PolimiAPI._get_response(url)
+        return call(url)
 
     @staticmethod
     def get_contatti(id_persona):
@@ -192,7 +178,7 @@ class PolimiAPI:
         """
         url = PolimiAPI.base_url + 'contatti/{}'.format(id_persona)
 
-        return PolimiAPI._get_response(url)
+        return call(url)
 
     @staticmethod
     def get_elenco_sedi():
@@ -229,7 +215,7 @@ class PolimiAPI:
         """
         url = PolimiAPI.base_url + 'elencoSedi/'
 
-        return PolimiAPI._get_response(url)
+        return call(url)
 
     @staticmethod
     def get_elenco_aule_libere(sede, date, start_time, end_time):
@@ -281,7 +267,7 @@ class PolimiAPI:
         payload = 'soloAuleLibere={}&dalleAulaLibera={}&alleAulaLibera={}&dataAulaLibera={}' \
             .format('S', start_time.strftime('%H:%M'), end_time.strftime('%H:%M'), date.strftime('%d/%m/%Y'))
 
-        return PolimiAPI._get_response(url, payload)
+        return call(url, payload)
 
     @staticmethod
     def get_elenco_servizi_shell(matricola):
@@ -323,7 +309,7 @@ class PolimiAPI:
         """
         url = PolimiAPI.base_url + 'elencoServiziShell/{}'.format(matricola)
 
-        return PolimiAPI._get_response(url)
+        return call(url)
 
     @staticmethod
     def get_docente(id_persona):
@@ -345,4 +331,4 @@ class PolimiAPI:
         """
         url = PolimiAPI.base_url + 'docente/{}/foto/'.format(id_persona)
 
-        return PolimiAPI._get_response(url)
+        return call(url)
