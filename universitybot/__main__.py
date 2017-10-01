@@ -7,7 +7,7 @@ from universitybot.bot import Bot
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
-                    # filename='log.log'
+                    #filename='log.log'
                     )
 
 logger = logging.getLogger(__name__)
@@ -17,6 +17,7 @@ def main():
     # Load configuration file
     with open('conf/conf.test.json') as json_data_file:
         conf = json.load(json_data_file)
+    logger.info("Configuration file loaded")
 
     # run bot
     Bot(conf['telegram'])

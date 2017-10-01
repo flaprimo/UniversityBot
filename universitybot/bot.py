@@ -4,6 +4,9 @@ from universitybot.commands.help import Help
 from universitybot.commands.freeclassrooms import FreeClassrooms
 
 from telegram.ext import Updater
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Bot:
@@ -39,15 +42,18 @@ class Bot:
             webhook_url='{}:{}/{}'.format(self.conf['webhook']['url'],
                                           self.conf['webhook']['port'],
                                           self.conf['token']))  # 'https://example.com:8443/TOKEN'
+        logger.info("Webhook started")
 
     def _start_polling(self):
         self.updater.start_polling()
+        logger.info("Polling started")
 
     def _add_commands(self):
         Start(self.dispatcher)
         Info(self.dispatcher)
         Help(self.dispatcher)
         FreeClassrooms(self.dispatcher)
+        logger.info("All command handlers have been registered")
 
     '''
     def error(bot, update, error):

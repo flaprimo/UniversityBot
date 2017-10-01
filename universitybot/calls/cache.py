@@ -1,4 +1,7 @@
 from datetime import datetime
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Cache:
@@ -10,8 +13,10 @@ class Cache:
         cached_element = list(filter(lambda x: x['url'] == url, self.cache))
 
         if len(cached_element) > 0 and datetime.now() - cached_element[0]['time'] < time_delta:
-            return cached_element
+            logger.debug('found cached element: %s' % str(cached_element[0]))
+            return cached_element[0]['content']
         else:
+            logger.debug('no cached element found for: %s' % url)
             return None
 
     def update_cache(self, url, content):
@@ -28,3 +33,4 @@ class Cache:
             'content': content,
             'time': datetime.now()
         })
+        logger.debug('added to cache element: {%s, %s, time} (list size: %s)' % (url, content, len(self.cache)))
