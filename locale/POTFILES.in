@@ -1,7 +1,8 @@
 # List of source files containing translatable strings.
 
 # Commands
-lib/Commands/Start.py
-lib/Commands/Info.py
-lib/Commands/Help.py
-lib/Commands/FreeClassrooms.py
+universitybot/commands/start.py
+universitybot/commands/help.py
+universitybot/commands/credits.py
+universitybot/commands/freeclassrooms.py
+universitybot/commands/links.py

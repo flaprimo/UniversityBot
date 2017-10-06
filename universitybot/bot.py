@@ -1,7 +1,8 @@
 from universitybot.commands.start import Start
-from universitybot.commands.info import Info
+from universitybot.commands.credits import Credits
 from universitybot.commands.help import Help
 from universitybot.commands.freeclassrooms import FreeClassrooms
+from universitybot.commands.links import Links
 
 from telegram.ext import Updater
 import logging
@@ -50,9 +51,10 @@ class Bot:
 
     def _add_commands(self):
         Start(self.dispatcher)
-        Info(self.dispatcher)
+        Credits(self.dispatcher)
         Help(self.dispatcher)
         FreeClassrooms(self.dispatcher)
+        Links(self.dispatcher)
         logger.info("All command handlers have been registered")
 
     '''

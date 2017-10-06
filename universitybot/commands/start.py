@@ -1,5 +1,7 @@
 import logging
+import telegram
 from telegram.ext import CommandHandler
+from telegram import ReplyKeyboardRemove
 from universitybot.translation import translate
 
 
@@ -27,12 +29,16 @@ COMMANDS
 '''
 
 
+@translate
 def start(bot, update):
     user = update.message.from_user
 
     logger.info("%s[%s] started start command: %s" % (user.first_name, user['language_code'], update.message.text))
-    translate(user['language_code'])
 
-    update.message.reply_text(_('Hi ') + user.first_name + '!\n' +
-                              _('I\'m here to help you survive at Politecnico di Milano (or at least I try),\n'
-                                'to know what I can do for you just ask for some /help !'))
+    update.message.reply_text(_('*Hi %(user)s!*\n\n'
+                                'I\'m here to help you at Politecnico di Milano,\n'
+                                'to know what I can do for you just ask for some /help!')
+                              % {'user': user.first_name},
+                              disable_web_page_preview=True,
+                              reply_markup=ReplyKeyboardRemove(),
+                              parse_mode=telegram.ParseMode.MARKDOWN)

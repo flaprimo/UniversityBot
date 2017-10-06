@@ -1,7 +1,6 @@
 from datetime import timedelta
 from universitybot.calls.cache import Cache
 import json
-import requests
 import logging
 
 logger = logging.getLogger(__name__)
@@ -21,16 +20,53 @@ def call(url, payload='', delta_time=timedelta(hours=24)):
         return cached
     else:
         # make api call because not found in cache
-        response = requests.get(url)
+        return _pycurl_call(url)
 
-        if response.ok:
-            response_json = json.loads(response.text)
-            logger.debug('Response not cached')
 
-            # update cache
-            _cache.update_cache(url, response_json)
+def _requests_call(url):
+    import requests
 
-            return response_json
-        else:
-            logger.error('Reponse not cached error')
-            response.raise_for_status()
+    response = requests.get(url)
+
+    if response.ok:
+        response_json = json.loads(response.text)
+        logger.debug('Response not cached')
+
+        # update cache
+        _cache.update_cache(url, response_json)
+
+        return response_json
+    else:
+        logger.error('Reponse not cached error')
+        response.raise_for_status()
+
+
+def _pycurl_call(url):
+    import pycurl
+    from io import BytesIO
+
+    buffer = BytesIO()
+
+    c = pycurl.Curl()
+    c.setopt(c.URL, url)
+    c.setopt(c.CONNECTTIMEOUT, 5)
+    c.setopt(c.TIMEOUT, 8)
+    c.setopt(c.COOKIEFILE, '')
+    c.setopt(c.FAILONERROR, True)
+    c.setopt(c.HTTPHEADER, ['Accept: application/json', 'Accept-Charset: UTF-8'])
+    c.setopt(c.WRITEFUNCTION, buffer.write)
+
+    try:
+        c.perform()
+
+        response_json = json.loads(buffer.getvalue().decode('utf-8'))
+        buffer.close()
+        logger.debug('Response not cached')
+
+        # update cache
+        _cache.update_cache(url, response_json)
+
+        return response_json
+    except pycurl.error:
+        buffer.close()
+        logger.error('Reponse not cached error')

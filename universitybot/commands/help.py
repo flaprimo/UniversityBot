@@ -5,7 +5,7 @@ from universitybot.translation import translate
 
 class Help:
     """
-    Greet a new user to the bot.
+    Help the user by listing the bot functionalities.
     """
 
     def __init__(self, dispatcher):
@@ -27,13 +27,20 @@ COMMANDS
 '''
 
 
+@translate
 def help(bot, update):
     user = update.message.from_user
 
     logger.info("%s[%s] started help command: %s" % (user.first_name, user['language_code'], update.message.text))
 
-    translate(user['language_code'])
-    update.message.reply_text(_('Here\'s a list of the available commands:\n') +
-                              '/provider - ' + _('Search for available classrooms\n') +
-                              '/help - ' + _('Show how I can help you\n') +
-                              '/info - ' + _('Get to know my parents\n'))
+    command_list = [
+        ('/freeclassrooms', _('search for free classrooms')),
+        ('/links', _('useful links')),
+        ('/help', _('list available commands')),
+        ('/credits', _('bot creators'))]
+
+    command_string = ''
+    for command in command_list:
+        command_string += '\n{} - {}'.format(command[0], command[1])
+
+    update.message.reply_text(_('How can I help you?') + '\n' + command_string)
