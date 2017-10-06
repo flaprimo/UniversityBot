@@ -38,7 +38,7 @@ def links(bot, update):
             'category_name': _('Bureaucracy'),
             'links': [
                 (_('Registrar\'s Office'), 'https://www.polimi.it/studenti/contatti/segreterie-studenti/'),
-                (_('Carrier Service'), 'http://www.careerservice.polimi.it/it-IT/Home/Index/')]
+                (_('Career Service'), 'http://www.careerservice.polimi.it/it-IT/Home/Index/')]
         },
         {
             'category_name': _('Online accounts'),
