@@ -1,5 +1,9 @@
 from itertools import groupby
 from universitybot.providers.polimi_api import PolimiAPI
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 class FreeClassroomsProvider:
@@ -31,7 +35,7 @@ class FreeClassroomsProvider:
             return FreeClassroomsProvider._to_string(classrooms)
 
         except:
-            raise ConnectionError('Politecnico di Milano server seems not responding')
+            logger.error('Failed to open file', exc_info=True)
 
     @staticmethod
     def _to_string(freeclassrooms_list):

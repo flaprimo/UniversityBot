@@ -1,1 +1,1 @@
-from universitybot.commands import start, help, info, freeclassrooms
+from universitybot.commands import start, help, credits, freeclassrooms, links

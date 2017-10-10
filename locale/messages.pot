@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Flavio Primo
+# Copyright (C) YEAR Flavio Primo, Paolo Paterna
 # This file is distributed under the same license as the UNIVERSITY BOT package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: UNIVERSITY BOT 1.0\n"
-"Report-Msgid-Bugs-To: project's issue github page\n"
-"POT-Creation-Date: 2017-09-10 11:02+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/flaprimo/UniversityBot/issues\n"
+"POT-Creation-Date: 2017-10-07 00:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,97 +17,162 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/Commands/Start.py:36
-msgid "Hi "
-msgstr ""
-
-#: lib/Commands/Start.py:37
+#: universitybot/commands/start.py:38
+#, python-format
 msgid ""
-"I'm here to help you survive at Politecnico di Milano (or at least I try),\n"
+"*Hi %(user)s!*\n"
+"\n"
+"I'm here to help you at Politecnico di Milano,\n"
+"to know what I can do for you just ask for some /help!"
 msgstr ""
 
-#: lib/Commands/Start.py:38
-msgid "to know what I can do for you just ask for some /help !"
+#: universitybot/commands/help.py:37
+msgid "search for free classrooms"
 msgstr ""
 
-#: lib/Commands/Info.py:36
-msgid "Here I proudly present my parents!\n"
+#: universitybot/commands/help.py:38
+msgid "useful links"
 msgstr ""
 
-#: lib/Commands/Info.py:37
-msgid "You can follow his ramblings here https://flavioprimo.xyz/"
+#: universitybot/commands/help.py:39
+msgid "list available commands"
 msgstr ""
 
-#: lib/Commands/Help.py:36
-msgid "Here's a list of the available commands:\n"
+#: universitybot/commands/help.py:40
+msgid "bot creators"
 msgstr ""
 
-#: lib/Commands/Help.py:37
-msgid "Search for available classrooms\n"
+#: universitybot/commands/help.py:46
+msgid "How can I help you?"
 msgstr ""
 
-#: lib/Commands/Help.py:38
-msgid "Show how I can help you\n"
+#: universitybot/commands/credits.py:38
+msgid "I was created by:"
 msgstr ""
 
-#: lib/Commands/Help.py:39
-msgid "Get to know my parents\n"
-msgstr ""
-
-#: lib/Commands/FreeClassrooms.py:77
+#: universitybot/commands/credits.py:40
 msgid ""
-"Let's search for free classrooms!\n"
-"Select start time hour"
+"you can follow him at [https://flavioprimo.xyz/](https://flavioprimo.xyz/)"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:89
+#: universitybot/commands/credits.py:42
+msgid "you can follow him at [https://paterna.tk/](https://paterna.tk/)"
+msgstr ""
+
+#: universitybot/commands/freeclassrooms.py:78
+msgid "Let's search for free classrooms!"
+msgstr ""
+
+#: universitybot/commands/freeclassrooms.py:78
+msgid "Select start time hour"
+msgstr ""
+
+#: universitybot/commands/freeclassrooms.py:91
 msgid "Select start time minutes"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:101
+#: universitybot/commands/freeclassrooms.py:104
 msgid "Select end time hour"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:113
+#: universitybot/commands/freeclassrooms.py:117
 msgid "Select end time minutes"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:125
+#: universitybot/commands/freeclassrooms.py:130
 msgid "Select day"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:150
+#: universitybot/commands/freeclassrooms.py:158
 msgid "Free classrooms for *"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:151
+#: universitybot/commands/freeclassrooms.py:159
 msgid "* from *"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:152
+#: universitybot/commands/freeclassrooms.py:160
 msgid "* to *"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:153
+#: universitybot/commands/freeclassrooms.py:161
 msgid "* are:\n"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:160
-msgid "I'm sorry, but it seems like Politecnico has some difficulties, "
+#: universitybot/commands/freeclassrooms.py:168
+msgid "I'm sorry, but it seems like Politecnico has some difficulties"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:161
-msgid "not my fault! (pinky swear)"
+#: universitybot/commands/freeclassrooms.py:171
+msgid ""
+"I'm sorry, but it seems like you didn't enter an end time which is greater "
+"than the start time"
 msgstr ""
 
-#: lib/Commands/FreeClassrooms.py:164
-msgid "I'm sorry, but it seems like you didn't enter an end time which is"
-msgstr ""
-
-#: lib/Commands/FreeClassrooms.py:165
-msgid " greater than the start time, not my fault!"
-msgstr ""
-
-#: lib/Commands/FreeClassrooms.py:179
+#: universitybot/commands/freeclassrooms.py:187
 msgid "Bye! I hope we can talk again some day."
+msgstr ""
+
+#: universitybot/commands/links.py:38
+msgid "Bureaucracy"
+msgstr ""
+
+#: universitybot/commands/links.py:40
+msgid "Registrar's Office"
+msgstr ""
+
+#: universitybot/commands/links.py:41
+msgid "Carrier Service"
+msgstr ""
+
+#: universitybot/commands/links.py:44
+msgid "Online accounts"
+msgstr ""
+
+#: universitybot/commands/links.py:46
+msgid "Online Services"
+msgstr ""
+
+#: universitybot/commands/links.py:47
+msgid "Office 365"
+msgstr ""
+
+#: universitybot/commands/links.py:48
+msgid "Beep"
+msgstr ""
+
+#: universitybot/commands/links.py:51
+msgid "Programmes"
+msgstr ""
+
+#: universitybot/commands/links.py:53
+msgid "Degree Programmes"
+msgstr ""
+
+#: universitybot/commands/links.py:55
+msgid "Bachelor of Science list"
+msgstr ""
+
+#: universitybot/commands/links.py:56
+msgid "Master of Science list"
+msgstr ""
+
+#: universitybot/commands/links.py:57
+msgid "Academic Calendar"
+msgstr ""
+
+#: universitybot/commands/links.py:60
+msgid "Social"
+msgstr ""
+
+#: universitybot/commands/links.py:62
+msgid "Facebook Official Page"
+msgstr ""
+
+#: universitybot/commands/links.py:63
+msgid "Facebook Official Group"
+msgstr ""
+
+#: universitybot/commands/links.py:73
+msgid "Useful links for Politecnico di Milano:"
 msgstr ""
