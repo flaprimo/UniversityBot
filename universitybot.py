@@ -7,6 +7,7 @@ from universitybot.commands.start import Start
 from universitybot.commands.help import Help
 from universitybot.commands.info import Info
 from universitybot.commands.freeclassrooms import FreeClassrooms
+from universitybot.commands.classroominfo import ClassroomInfo
 
 # Logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -36,6 +37,8 @@ def main():
     Help(dispatcher)
     Info(dispatcher)
     FreeClassrooms(dispatcher)
+    ClassroomInfo(dispatcher)
+
 
     # Log all errors
     dispatcher.add_error_handler(error)
