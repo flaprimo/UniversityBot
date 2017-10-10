@@ -40,7 +40,7 @@ UNIVERSITY_CAMPUS, CLASSROOM_NAME, CLASSROOM_INFO = range(3)
 campuses_codes = {}
 campuses_list = []
 campus_regexp = '^('
-class_details_regexp = '^(Building|Photo|Notes|How to reach it)$'
+class_details_regexp = '^(Building|Photo|Notes|How to reach it|Cancel)$'
 
 
 def classinfo(bot, update):
@@ -80,12 +80,12 @@ def select_classroom(bot, update, user_data):
     classroom_dict = ClassroomInfoProvider.get_campus_classroom(user_data['campus_code'])
 
     for classroom in classroom_dict:
-        if re.sub('\(.*\)','',classroom['sigla']).replace('_LABORATORIO', '').replace('.', '').lower() == \
+        if re.sub('\(.*\)', '', classroom['sigla']).replace('_LABORATORIO', '').replace('.', '').lower() == \
                 re.sub('\(.*\)', '', update.message.text).replace('_LABORATORIO', '').replace('.', '').lower():
 
             user_data['class_id'] = classroom['id_aula']
 
-            reply_keyboard = [['Building', 'Photo', 'Notes'], ['How to reach it']]
+            reply_keyboard = [['Building', 'Photo', 'Notes'], ['How to reach it', 'Cancel']]
             translate(user['language_code'])
             update.message.reply_text(_('Classroom found!\nWhat do you want to know?'),
                                       reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
@@ -97,10 +97,26 @@ def select_classroom(bot, update, user_data):
 
 def classroom_details(bot, update, user_data):
     user = update.message.from_user
-    logger.info('{} selected {} info'.format(user.first_name, update.message.text))
+    option_selected = update.message.text
+    logger.info('{} selected {} info'.format(user.first_name, option_selected))
     classroom_detail = ClassroomInfoProvider.get_classroom_details(user_data['class_id'])
+    if option_selected == 'Building':
+        update.message.reply_text(_('The Classroom you selected is in ' + classroom_detail['nomeEdificio'] +
+                                    ' at ' + classroom_detail['nomePiano'] + 'floor.'))
+    elif option_selected == 'Photo':
+        update.message.reply_text(_('Here\'s the photo of the classroom: ' + classroom_detail['url_foto_aula']))
+    elif option_selected == 'Notes':
+        update.message.reply_text(classroom_detail['noteAccessoEdificio'])
+    elif option_selected == 'How to reach it':
+        access_ways = classroom_detail['percorsiAccesso']
+        response = ''
+        for way in access_ways:
+            response = response + '*From {}* \n \t {}\n'.format(way['partenza'], way['descrizione'])
+    else:
+        cancel(bot, update, user_data)
+        return ConversationHandler.END
 
-    pass
+    return CLASSROOM_NAME
 
 
 def cancel(bot, update, user_data):
