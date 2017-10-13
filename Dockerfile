@@ -1,4 +1,3 @@
-# start from Python 3 base image
 FROM alpine
 
 # install system dependencies
