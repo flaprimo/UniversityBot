@@ -16,4 +16,9 @@ Use it to find information about halls, free classrooms and useful links.
 * Paolo Paterna ([@TopoDiFogna](https://github.com/TopoDiFogna))
 
 ## Installation instructions
-Install `sudo apt install libssl-dev libcurl4-openssl-dev python-dev` if you want to use `pycurl` backend to make calls instead of `requests`.
+Install `sudo apt install libssl-dev libcurl4-openssl-dev python3-dev` if you want to use `pycurl` backend to make calls instead of `requests`.
+
+1. [Install Docker](https://docs.docker.com/engine/installation/) EE edition (including [post-installation](https://docs.docker.com/engine/installation/linux/linux-postinstall/) instructions)
+2. Install [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
+3. clone this repository
+4. launch `docker-compose build` and then `docker-compose up` in the project folder
