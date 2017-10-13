@@ -1,0 +1,7 @@
+.git
+.idea
+env
+__pycache__
+.gitignore
+.travis.yml
+*.md

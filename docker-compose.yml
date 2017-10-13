@@ -1,9 +1,0 @@
-version: "3"
-
-services:
-  universitybot:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - /home/flaprimo/UniversityBot/conf:/opt/UniversityBot/conf

@@ -18,7 +18,12 @@ Use it to find information about halls, free classrooms and useful links.
 ## Installation instructions
 Install `sudo apt install libssl-dev libcurl4-openssl-dev python3-dev` if you want to use `pycurl` backend to make calls instead of `requests`.
 
-1. [Install Docker](https://docs.docker.com/engine/installation/) EE edition (including [post-installation](https://docs.docker.com/engine/installation/linux/linux-postinstall/) instructions)
+1. [Install Docker](https://docs.docker.com/engine/installation/) CE edition (including [post-installation](https://docs.docker.com/engine/installation/linux/linux-postinstall/) instructions)
 2. Install [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
 3. clone this repository
-4. launch `docker-compose build` and then `docker-compose up` in the project folder
+4. open a terminal into project folder and build the docker image with `docker build -t universitybot .`
+5. run the docker image with:
+    * on a development environment would probably be:
+    `docker run --volume=/home/$USER/Workspace/UniversityBot:/opt/UniversityBot universitybot`
+    * on a production environment would probably be:
+    `docker run --name=universitybot --restart=on-failure:10 --volume=/home/$USER/UniversityBot/conf:/opt/UniversityBot/conf universitybot`
