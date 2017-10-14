@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 def main():
     # Load configuration file
-    with open('conf/conf.test.json') as json_data_file:
+    with open('conf/conf.json') as json_data_file:
         conf = json.load(json_data_file)
     logger.info("Configuration file loaded")
 
