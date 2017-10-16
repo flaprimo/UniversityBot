@@ -32,11 +32,11 @@ before_install:
   - docker build -t $DOCKER_USERNAME/universitybot .
   - ls
   # run docker container
-  - cp ./conf/conf.example.json ./conf/conf.json
-  - sed -i '/        "token":"",/c\        "token":"$DOCKER_USERNAME"' ./conf/conf.json
+  - mv ./conf/conf.example.json ./conf/conf.json
+  - sed -i "/        \"token\":\"\",/c\        \"token\":\"$DOCKER_USERNAME\"," ./conf/conf.example.json
   - ls ./conf
   - cat ./conf/conf.json
-  - docker run $DOCKER_USERNAME/universitybot
+  - docker run -d $DOCKER_USERNAME/universitybot --memory=40m --volume=$TRAVIS_BUILD_DIR/conf:/opt/UniversityBot/conf
   - docker ps -a
   - docker stats --no-stream
 
