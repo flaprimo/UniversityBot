@@ -33,7 +33,7 @@ before_install:
   - ls
   # run docker container
   - mv ./conf/conf.example.json ./conf/conf.json
-  - sed -i "/        \"token\":\"\",/c\        \"token\":\"$DOCKER_USERNAME\"," ./conf/conf.example.json
+  - sed -i "/        \"token\":\"\",/c\        \"token\":\"$TELEGRAM_STAGINGBOT_TOKEN\"," ./conf/conf.json
   - ls ./conf
   - cat ./conf/conf.json
   - docker run -d $DOCKER_USERNAME/universitybot --memory=40m --volume=$TRAVIS_BUILD_DIR/conf:/opt/UniversityBot/conf
