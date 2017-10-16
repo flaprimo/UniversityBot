@@ -1,5 +1,6 @@
 .git
 .idea
+/conf/*
 env
 __pycache__
 .gitignore
