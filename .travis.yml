@@ -47,4 +47,3 @@ after_success:
 
 script:
   - nosetests
-  - flake8 --statistics --show-source --disable-noqa
