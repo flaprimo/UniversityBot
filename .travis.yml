@@ -29,15 +29,14 @@ before_install:
   - sudo apt update
   - sudo apt install -y docker-ce
   - docker --version
-  - sudo usermod -a -G docker $USER
   # build docker image
   - docker build -t $DOCKER_USERNAME/universitybot .
   # run docker container
-  #- mv ./conf/conf.example.json ./conf/conf.json
-  #- sed -i "/        \"token\":\"\",/c\        \"token\":\"$TELEGRAM_STAGINGBOT_TOKEN\"," ./conf/conf.json
-  #- docker run -d $DOCKER_USERNAME/universitybot --volume=/home/travis/build/universitybot/UniversityBot/conf:/opt/UniversityBot/conf
-  #- docker ps -a
-  #- docker stats --no-stream
+  - cp ./conf/conf.example.json $CI_HOME/conf/conf.json
+  - sed -i "/        \"token\":\"\",/c\        \"token\":\"$TELEGRAM_STAGINGBOT_TOKEN\"," ./conf/conf.json
+  - docker run -d $DOCKER_USERNAME/universitybot --volume=$CI_HOME/conf:/opt/UniversityBot/conf
+  - docker ps -a
+  - docker stats --no-stream
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
