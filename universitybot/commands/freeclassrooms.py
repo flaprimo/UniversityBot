@@ -1,8 +1,9 @@
 import datetime
 import logging
 import telegram
-from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove)
-from telegram.ext import (CommandHandler, RegexHandler, ConversationHandler)
+from universitybot.utility import delete_userdata
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram.ext import CommandHandler, RegexHandler, ConversationHandler
 from universitybot.providers.freeclassrooms import FreeClassroomsProvider
 from universitybot.translation import translate
 
@@ -76,7 +77,9 @@ def freeclassrooms(bot, update):
                 (user.first_name, user['language_code'], update.message.text))
 
     update.message.reply_text(_('Let\'s search for free classrooms!') + '\n\n' + _('Select start time hour'),
-                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True))
+                              reply_markup=ReplyKeyboardMarkup(reply_keyboard,
+                                                               one_time_keyboard=True,
+                                                               resize_keyboard=True))
 
     return STARTTIME_HOUR
 
@@ -89,7 +92,9 @@ def select_starttime_hour(bot, update, user_data):
     logger.info("%s[%s] added starttime_hour: %s" % (user.first_name, user['language_code'], update.message.text))
 
     update.message.reply_text(_('Select start time minutes'),
-                              reply_markup=ReplyKeyboardMarkup(minute_keyboard, one_time_keyboard=True))
+                              reply_markup=ReplyKeyboardMarkup(minute_keyboard,
+                                                               one_time_keyboard=True,
+                                                               resize_keyboard=True))
 
     return STARTTIME_MIN
 
@@ -102,7 +107,9 @@ def select_starttime_min(bot, update, user_data):
     logger.info("%s[%s] added starttime_min: %s" % (user.first_name, user['language_code'], update.message.text))
 
     update.message.reply_text(_('Select end time hour'),
-                              reply_markup=ReplyKeyboardMarkup(hour_keyboard, one_time_keyboard=True))
+                              reply_markup=ReplyKeyboardMarkup(hour_keyboard,
+                                                               one_time_keyboard=True,
+                                                               resize_keyboard=True))
 
     return ENDTIME_HOUR
 
@@ -115,7 +122,9 @@ def select_endtime_hour(bot, update, user_data):
     logger.info("%s[%s] added endtime_hour: %s" % (user.first_name, user['language_code'], update.message.text))
 
     update.message.reply_text(_('Select end time minutes'),
-                              reply_markup=ReplyKeyboardMarkup(minute_keyboard, one_time_keyboard=True))
+                              reply_markup=ReplyKeyboardMarkup(minute_keyboard,
+                                                               one_time_keyboard=True,
+                                                               resize_keyboard=True))
 
     return ENDTIME_MIN
 
@@ -128,7 +137,9 @@ def select_endtime_min(bot, update, user_data):
     logger.info("%s[%s] added endtime_min: %s" % (user.first_name, user['language_code'], update.message.text))
 
     update.message.reply_text(_('Select day'),
-                              reply_markup=ReplyKeyboardMarkup(day_keyboard, one_time_keyboard=True))
+                              reply_markup=ReplyKeyboardMarkup(day_keyboard,
+                                                               one_time_keyboard=True,
+                                                               resize_keyboard=True))
 
     return DAY
 
@@ -173,7 +184,7 @@ def select_day(bot, update, user_data):
                                   reply_markup=ReplyKeyboardRemove())
 
     # delete user conversation data
-    _delete_userdata(user_data)
+    delete_userdata(user_data, ['starttime_hour', 'starttime_min', 'endtime_hour', 'endtime_min', 'day'])
 
     return ConversationHandler.END
 
@@ -187,28 +198,6 @@ def cancel(bot, update, user_data):
     update.message.reply_text(_('Bye! I hope we can talk again some day.'), reply_markup=ReplyKeyboardRemove())
 
     # delete user conversation data
-    _delete_userdata(user_data)
+    delete_userdata(user_data, ['starttime_hour', 'starttime_min', 'endtime_hour', 'endtime_min', 'day'])
 
     return ConversationHandler.END
-
-
-'''
-UTILITIES
-'''
-
-
-def _delete_userdata(user_data):
-    if 'starttime_hour' in user_data:
-        del user_data['starttime_hour']
-
-    if 'starttime_min' in user_data:
-        del user_data['starttime_min']
-
-    if 'endtime_hour' in user_data:
-        del user_data['endtime_hour']
-
-    if 'endtime_min' in user_data:
-        del user_data['endtime_min']
-
-    if 'day' in user_data:
-        del user_data['day']

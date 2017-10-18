@@ -34,6 +34,7 @@ def help(bot, update):
     logger.info("%s[%s] started help command: %s" % (user.first_name, user['language_code'], update.message.text))
 
     command_list = [
+        ('/classroominfo', _('get classroom info (building, photo, notes, how to reach it)')),
         ('/freeclassrooms', _('search for free classrooms')),
         ('/links', _('useful links')),
         ('/help', _('list available commands')),

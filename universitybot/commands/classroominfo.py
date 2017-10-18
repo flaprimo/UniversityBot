@@ -1,5 +1,7 @@
 import logging
 import re
+from universitybot.utility import chunks, delete_userdata
+from universitybot.translation import translate
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, ParseMode
 from telegram.ext import ConversationHandler, CommandHandler, RegexHandler, MessageHandler
 from telegram.ext.filters import Filters
@@ -18,7 +20,7 @@ class ClassroomInfo:
         create_campus_regexp(campuses_list)
 
         conv_handler = ConversationHandler(
-            entry_points=[CommandHandler("classinfo", classinfo)],
+            entry_points=[CommandHandler("classroominfo", classroominfo)],
             states={
                 UNIVERSITY_CAMPUS: [RegexHandler(campus_regexp, select_campus, pass_user_data=True)],
                 CLASSROOM_NAME: [MessageHandler(Filters.text, select_classroom, pass_user_data=True)],
@@ -29,7 +31,7 @@ class ClassroomInfo:
 
         dispatcher.add_handler(conv_handler)
 
-        logger.info("Added /classinfo command to Telegram handler")
+        logger.info("Added /classroominfo command to Telegram handler")
 
 
 logger = logging.getLogger(__name__)
@@ -39,22 +41,24 @@ UNIVERSITY_CAMPUS, CLASSROOM_NAME, CLASSROOM_INFO = range(3)
 campuses_codes = {}
 campuses_list = []
 campus_regexp = '^('
-class_details_regexp = '^(Building|Photo|Notes|How to reach it|Cancel)$'
+class_details_regexp = '^(Building|Photo|Notes|Directions|Cancel)$'
 
 
-def classinfo(bot, update):
+@translate
+def classroominfo(bot, update):
     user = update.message.from_user
 
     reply_keyboard = list(chunks(campuses_list, 4))
 
-    logger.info("{}[{}] started classinfo command: {}".format(user.first_name, user['language_code'], update.message.text))
+    logger.info("{}[{}] started classroominfo command: {}".format(user.first_name, user['language_code'], update.message.text))
 
-    update.message.reply_text('Select a campus',
+    update.message.reply_text(_('Select a campus'),
                               reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=True))
 
     return UNIVERSITY_CAMPUS
 
 
+@translate
 def select_campus(bot, update, user_data):
     user = update.message.from_user
     for campus in campuses_codes:
@@ -63,11 +67,12 @@ def select_campus(bot, update, user_data):
 
     logger.info('{} selected campus {}'.format(user.first_name, update.message.text))
 
-    update.message.reply_text('In which classroom are you interest about?')
+    update.message.reply_text(_('What classroom are you interested in?'))
 
     return CLASSROOM_NAME
 
 
+@translate
 def select_classroom(bot, update, user_data):
     user = update.message.from_user
     user_data['classroom_info'] = update.message.text
@@ -82,33 +87,34 @@ def select_classroom(bot, update, user_data):
 
             user_data['class_id'] = classroom['id_aula']
 
-            reply_keyboard = [['Building', 'Photo', 'Notes'], ['How to reach it', 'Cancel']]
+            reply_keyboard = [['Building', 'Directions'], ['Notes', 'Photo'], ['Cancel']]
 
-            update.message.reply_text('Classroom found!\nWhat do you want to know?',
+            update.message.reply_text(_('Classroom found!\nWhat do you want to know?'),
                                       reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
             return CLASSROOM_INFO
     logger.warning('{} selected classroom {} that doesn\'t exists'.format(user.first_name, update.message.text))
-    update.message.reply_text('Classroom not found, try again or /cancel')
+    update.message.reply_text(_('Classroom not found, try again or /cancel'))
     return CLASSROOM_NAME
 
 
+@translate
 def classroom_details(bot, update, user_data):
     user = update.message.from_user
     option_selected = update.message.text
     logger.info('{} selected {} info'.format(user.first_name, option_selected))
     classroom_detail = ClassroomInfoProvider.get_classroom_details(user_data['class_id'])
     if option_selected == 'Building':
-        update.message.reply_text('The Classroom you selected is in ' + classroom_detail['nomeEdificio'] +
-                                    ' at ' + classroom_detail['nomePiano'] + 'floor.')
+        update.message.reply_text(_('The Classroom you selected is in ') + classroom_detail['nomeEdificio'] +
+                                  _(' at ') + classroom_detail['nomePiano'] + _(' floor.'))
     elif option_selected == 'Photo':
-        update.message.reply_text('Here\'s the photo of the classroom: ' + classroom_detail['url_foto_aula'])
+        update.message.reply_text(_('Here\'s the photo of the classroom: ') + classroom_detail['url_foto_aula'])
     elif option_selected == 'Notes':
         update.message.reply_text(classroom_detail['noteAccessoEdificio'])
-    elif option_selected == 'How to reach it':
+    elif option_selected == 'Directions':
         access_ways = classroom_detail['percorsiAccesso']
         response = ''
         for way in access_ways:
-            response = response + '*From {}* \n \t {}\n'.format(way['partenza'], way['descrizione'])
+            response += '*' + _('From') + ' {}* \n \t {}\n'.format(way['partenza'], way['descrizione'])
         update.message.reply_text(response, parse_mode=ParseMode.MARKDOWN)
     else:
         cancel(bot, update, user_data)
@@ -117,15 +123,16 @@ def classroom_details(bot, update, user_data):
     return CLASSROOM_INFO
 
 
+@translate
 def cancel(bot, update, user_data):
     user = update.message.from_user
 
     logger.info("{} canceled command: {}".format(user.first_name, update.message.text))
 
-    update.message.reply_text('Bye! I hope we can talk again some day.', reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text(_('Bye! I hope we can talk again some day.'), reply_markup=ReplyKeyboardRemove())
 
     # delete user conversation data
-    _delete_userdata(user_data)
+    delete_userdata(user_data, ['campus_code', 'classroom_info', 'class_id'])
 
     return ConversationHandler.END
 
@@ -140,20 +147,3 @@ def create_campus_regexp(campuses):
     for campus in campuses:
         campus_regexp = campus_regexp + campus + '|'
     campus_regexp = campus_regexp[:-1] + ')$'
-
-
-def chunks(campuses, max_col):
-    """Yield successive n-sized chunks from l."""
-    for i in range(0, len(campuses), max_col):
-        yield campuses[i:i + max_col]
-
-
-def _delete_userdata(user_data):
-    if 'campus_code' in user_data:
-        del user_data['campus_code']
-
-    if 'classroom_info' in user_data:
-        del user_data['classroom_info']
-
-    if 'class_id' in user_data:
-        del user_data['class_id']
