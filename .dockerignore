@@ -1,6 +1,10 @@
 .git
 .idea
+conf/conf.json
+Dockerfile
 env
+res
+logs/*
 __pycache__
 .gitignore
 .travis.yml

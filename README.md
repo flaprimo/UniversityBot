@@ -35,5 +35,4 @@ Install `sudo apt install libssl-dev libcurl4-openssl-dev python3-dev` if you wa
 * implement occupation, returns html of the occupation of the day
 * implement room occupation, returns classroom occupation based on the day, https://github.com/jarrekk/imgkit
 * webhook
-* logging
 * run docker image on travis
