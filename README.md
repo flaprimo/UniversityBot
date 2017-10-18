@@ -6,6 +6,7 @@ Use it to find information about halls, free classrooms and useful links.
 
 ## Features
 * shows useful links
+*
 * shows free classrooms
 * in memory cache requests for api calls for faster response
 * multi-language support through the [gettext](https://www.gnu.org/software/gettext/) standard
@@ -27,3 +28,12 @@ Install `sudo apt install libssl-dev libcurl4-openssl-dev python3-dev` if you wa
     `docker run --volume=/home/$USER/Workspace/UniversityBot:/opt/UniversityBot universitybot`
     * on a production environment would probably be:
     `docker run --name=universitybot --restart=on-failure:10 --volume=/home/$USER/UniversityBot/conf:/opt/UniversityBot/conf universitybot`
+    
+## TODO
+* implement inline
+* implement add arguments to commands
+* implement occupation, returns html of the occupation of the day
+* implement room occupation, returns classroom occupation based on the day, https://github.com/jarrekk/imgkit
+* webhook
+* logging
+* run docker image on travis
