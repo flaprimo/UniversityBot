@@ -1,10 +1,9 @@
 import logging
 import re
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, ParseMode
 from telegram.ext import ConversationHandler, CommandHandler, RegexHandler, MessageHandler
 from telegram.ext.filters import Filters
 from universitybot.providers.classroominfo import ClassroomInfoProvider
-from universitybot.translation import translate
 
 
 class ClassroomInfo:
@@ -50,8 +49,7 @@ def classinfo(bot, update):
 
     logger.info("{}[{}] started classinfo command: {}".format(user.first_name, user['language_code'], update.message.text))
 
-    translate(user['language_code'])
-    update.message.reply_text(_('Select a campus'),
+    update.message.reply_text('Select a campus',
                               reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=True))
 
     return UNIVERSITY_CAMPUS
@@ -65,8 +63,7 @@ def select_campus(bot, update, user_data):
 
     logger.info('{} selected campus {}'.format(user.first_name, update.message.text))
 
-    translate(user['language_code'])
-    update.message.reply_text(_('In which classroom are you interest about?'))
+    update.message.reply_text('In which classroom are you interest about?')
 
     return CLASSROOM_NAME
 
@@ -86,12 +83,12 @@ def select_classroom(bot, update, user_data):
             user_data['class_id'] = classroom['id_aula']
 
             reply_keyboard = [['Building', 'Photo', 'Notes'], ['How to reach it', 'Cancel']]
-            translate(user['language_code'])
-            update.message.reply_text(_('Classroom found!\nWhat do you want to know?'),
+
+            update.message.reply_text('Classroom found!\nWhat do you want to know?',
                                       reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
             return CLASSROOM_INFO
     logger.warning('{} selected classroom {} that doesn\'t exists'.format(user.first_name, update.message.text))
-    update.message.reply_text(_('Classroom not found, try again or /cancel'))
+    update.message.reply_text('Classroom not found, try again or /cancel')
     return CLASSROOM_NAME
 
 
@@ -101,10 +98,10 @@ def classroom_details(bot, update, user_data):
     logger.info('{} selected {} info'.format(user.first_name, option_selected))
     classroom_detail = ClassroomInfoProvider.get_classroom_details(user_data['class_id'])
     if option_selected == 'Building':
-        update.message.reply_text(_('The Classroom you selected is in ' + classroom_detail['nomeEdificio'] +
-                                    ' at ' + classroom_detail['nomePiano'] + 'floor.'))
+        update.message.reply_text('The Classroom you selected is in ' + classroom_detail['nomeEdificio'] +
+                                    ' at ' + classroom_detail['nomePiano'] + 'floor.')
     elif option_selected == 'Photo':
-        update.message.reply_text(_('Here\'s the photo of the classroom: ' + classroom_detail['url_foto_aula']))
+        update.message.reply_text('Here\'s the photo of the classroom: ' + classroom_detail['url_foto_aula'])
     elif option_selected == 'Notes':
         update.message.reply_text(classroom_detail['noteAccessoEdificio'])
     elif option_selected == 'How to reach it':
@@ -112,11 +109,12 @@ def classroom_details(bot, update, user_data):
         response = ''
         for way in access_ways:
             response = response + '*From {}* \n \t {}\n'.format(way['partenza'], way['descrizione'])
+        update.message.reply_text(response, parse_mode=ParseMode.MARKDOWN)
     else:
         cancel(bot, update, user_data)
         return ConversationHandler.END
 
-    return CLASSROOM_NAME
+    return CLASSROOM_INFO
 
 
 def cancel(bot, update, user_data):
@@ -124,8 +122,7 @@ def cancel(bot, update, user_data):
 
     logger.info("{} canceled command: {}".format(user.first_name, update.message.text))
 
-    translate(user['language_code'])
-    update.message.reply_text(_('Bye! I hope we can talk again some day.'), reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text('Bye! I hope we can talk again some day.', reply_markup=ReplyKeyboardRemove())
 
     # delete user conversation data
     _delete_userdata(user_data)
