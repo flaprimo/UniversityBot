@@ -40,7 +40,7 @@ class Bot:
         self.updater.start_webhook(              # Start internal web server
             listen=self.conf['webproxy']['ip'],  # '127.0.0.1'
             port=self.conf['webproxy']['port'],  # 8443
-            url_path=self.conf['url_path']          # We use the token
+            url_path=self.conf['webproxy']['url_path']          # We use the token
         )
         self.updater.bot.set_webhook(
             webhook_url=self.conf['webproxy']['url']+'/'+self.conf['url_path'])
