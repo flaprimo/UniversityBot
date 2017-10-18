@@ -25,6 +25,8 @@ class Bot:
         # Start the Bot
         if self.conf['connection'] == 'webhook':
             self._start_webhook()
+        elif self.conf['connection'] == 'webproxy':
+            self._start_webproxy()
         else:
             self._start_polling()
 
@@ -32,6 +34,15 @@ class Bot:
         # SIGTERM or SIGABRT. This should be used most of the time, since
         # start_polling() is non-blocking and will stop the bot gracefully.
         self.updater.idle()
+
+    def _start_webproxy(self):
+        self.updater.start_webhook(              # Start internal web server
+            listen=self.conf['webproxy']['ip'],  # '127.0.0.1'
+            port=self.conf['webproxy']['port'],  # 8443
+            url_path=self.conf['url_path']          # We use the token
+        )
+        self.updater.bot.set_webhook(
+            webhook_url=self.conf['webproxy']['url']+'/'+self.conf['url_path'])
 
     def _start_webhook(self):
         self.updater.start_webhook(
