@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 
-import logging
+import logging.config
 import json
 from universitybot.bot import Bot
 
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO,
-                    #filename='log.log'
-                    )
-
-logger = logging.getLogger(__name__)
-
-
 def main():
-    # Load configuration file
+    # load log configuration file
+    with open('conf/logging.json') as json_data_file:
+        logging_json = json.load(json_data_file)
+    logging.config.dictConfig(logging_json)
+
+    logger = logging.getLogger(__name__)
+
+    # load bot configuration file
     with open('conf/conf.json') as json_data_file:
         conf = json.load(json_data_file)
     logger.info("Configuration file loaded")

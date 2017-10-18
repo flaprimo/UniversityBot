@@ -13,7 +13,7 @@ COPY . ./
 RUN pip3 install -r requirements.txt
 
 # set volume
-VOLUME ["/opt/UniversityBot/conf"]
+VOLUME ["/opt/UniversityBot/conf", "/opt/UniversityBot/logs"]
 
 # run application
 CMD ["/usr/bin/python3", "/opt/UniversityBot/universitybot/__main__.py"]
