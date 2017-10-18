@@ -32,10 +32,10 @@ before_install:
   # build docker image
   - docker build -t $DOCKER_USERNAME/universitybot .
   # run docker container
-  - mkdir $CI_HOME/conf
+  - mkdir $HOME/conf
   - cp ./conf/conf.example.json $CI_HOME/conf/conf.json
   - sed -i "/        \"token\":\"\",/c\        \"token\":\"$TELEGRAM_STAGINGBOT_TOKEN\"," ./conf/conf.json
-  - docker run -d $DOCKER_USERNAME/universitybot --volume=$CI_HOME/conf:/opt/UniversityBot/conf
+  - docker run -d $DOCKER_USERNAME/universitybot --volume=$HOME/conf:/opt/UniversityBot/conf
   - docker ps -a
   - docker stats --no-stream
 
