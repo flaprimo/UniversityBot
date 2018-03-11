@@ -5,10 +5,14 @@ UnivesityBot is the bot that ease your life at Politecnico di Milano.
 Use it to find information about halls, free classrooms and useful links.
 
 ## Features
+### Available commands
 * shows useful links
-*
-* shows free classrooms
+* gets classroom information (building, photo, notes, directions)
+* searches for free classrooms
+
+### Technologies
 * in memory cache requests for api calls for faster response
+* deployment using [docker](https://www.docker.com/)
 * multi-language support through the [gettext](https://www.gnu.org/software/gettext/) standard
 * use of the tested and reliable [Python Telegram Bot](https://github.com/python-telegram-bot/python-telegram-bot) framework
 
@@ -36,3 +40,4 @@ Install `sudo apt install libssl-dev libcurl4-openssl-dev python3-dev` if you wa
 * implement room occupation, returns classroom occupation based on the day, https://github.com/jarrekk/imgkit
 * webhook
 * run docker image on travis
+* add more translations (Spanish, German, Dutch, Arabic, Portuguese and Korean)

@@ -33,11 +33,11 @@ def links(bot, update):
 
     logger.info("%s[%s] started links command: %s" % (user.first_name, user['language_code'], update.message.text))
 
-    link_list = [
+    link_list =     [
         {
             'category_name': _('Bureaucracy'),
             'links': [
-                (_('Registrar\'s Office'), 'https://www.polimi.it/studenti/contatti/segreterie-studenti/'),
+                (_('Registrar\'s Office'), 'https://www.polimi.it/studenti-iscritti/contatti/sportelli-e-uffici-aperti-agli-studenti/'),
                 (_('Career Service'), 'http://www.careerservice.polimi.it/it-IT/Home/Index/')]
         },
         {
@@ -52,9 +52,9 @@ def links(bot, update):
             'links': [
                 (_('Degree Programmes'),
                  'https://www4.ceda.polimi.it/manifesti/manifesti/controller/ManifestoPublic.do'),
-                (_('Bachelor of Science list'), 'https://www.polimi.it/studenti/contatti/segreterie-studenti/'),
+                (_('Bachelor of Science list'), 'https://www.polimi.it/corsi/corsi-di-laurea/'),
                 (_('Master of Science list'), 'https://www.polimi.it/corsi/corsi-di-laurea-magistrale/'),
-                (_('Academic Calendar'), 'https://www.polimi.it/studenti/calendarioaccademico/')]
+                (_('Academic Calendar'), 'https://www.polimi.it/studenti-iscritti/calendario-e-scadenze/')]
         },
         {
             'category_name': _('Social'),

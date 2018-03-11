@@ -8,171 +8,215 @@ msgid ""
 msgstr ""
 "Project-Id-Version: UNIVERSITY BOT 1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/flaprimo/UniversityBot/issues\n"
-"POT-Creation-Date: 2017-10-07 00:16+0200\n"
+"POT-Creation-Date: 2017-11-23 22:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+"X-Poedit-Basepath: ../universitybot/commands\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: universitybot/commands/start.py:38
+#: classroominfo.py:55
+msgid "Select a campus"
+msgstr ""
+
+#: classroominfo.py:70
+msgid "What classroom are you interested in?"
+msgstr ""
+
+#: classroominfo.py:91
+msgid ""
+"Classroom found!\n"
+"What do you want to know?"
+msgstr ""
+
+#: classroominfo.py:96
+msgid "Classroom not found, try again or /cancel"
+msgstr ""
+
+#: classroominfo.py:110
+msgid "The Classroom you selected is in "
+msgstr ""
+
+#: classroominfo.py:111
+msgid " at "
+msgstr ""
+
+#: classroominfo.py:111
+msgid " floor."
+msgstr ""
+
+#: classroominfo.py:114
+msgid "Here's the photo of the classroom: "
+msgstr ""
+
+#: classroominfo.py:124
+msgid "From"
+msgstr ""
+
+#: classroominfo.py:141 freeclassrooms.py:189
+msgid "Bye! I hope we can talk again some day."
+msgstr ""
+
+#: credits.py:38
+msgid "I was created by:"
+msgstr ""
+
+#: credits.py:40
+msgid ""
+"you can follow him at [https://flavioprimo.xyz/](https://flavioprimo.xyz/)"
+msgstr ""
+
+#: credits.py:42
+msgid "you can follow him at [https://paterna.tk/](https://paterna.tk/)"
+msgstr ""
+
+#: freeclassrooms.py:80
+msgid "Let's search for free classrooms!"
+msgstr ""
+
+#: freeclassrooms.py:80
+msgid "Select start time hour"
+msgstr ""
+
+#: freeclassrooms.py:95
+msgid "Select start time minutes"
+msgstr ""
+
+#: freeclassrooms.py:110
+msgid "Select end time hour"
+msgstr ""
+
+#: freeclassrooms.py:125
+msgid "Select end time minutes"
+msgstr ""
+
+#: freeclassrooms.py:140
+msgid "Select day"
+msgstr ""
+
+#: freeclassrooms.py:168
+msgid "I'm sorry, but it seems like Politecnico has some difficulties"
+msgstr ""
+
+#: freeclassrooms.py:173
+msgid ""
+"I'm sorry, but it seems like you didn't enter an end time which is greater "
+"than the start time"
+msgstr ""
+
+#: freeclassrooms.py:210
+msgid "Free classrooms for *"
+msgstr ""
+
+#: freeclassrooms.py:211
+msgid "* from *"
+msgstr ""
+
+#: freeclassrooms.py:212
+msgid "* to *"
+msgstr ""
+
+#: freeclassrooms.py:213
+msgid "* are:\n"
+msgstr ""
+
+#: help.py:37
+msgid "get classroom info (building, photo, notes, directions)"
+msgstr ""
+
+#: help.py:38
+msgid "search for free classrooms"
+msgstr ""
+
+#: help.py:39
+msgid "useful links"
+msgstr ""
+
+#: help.py:40
+msgid "list available commands"
+msgstr ""
+
+#: help.py:41
+msgid "bot creators"
+msgstr ""
+
+#: help.py:47
+msgid "How can I help you?"
+msgstr ""
+
+#: links.py:38
+msgid "Bureaucracy"
+msgstr ""
+
+#: links.py:40
+msgid "Registrar's Office"
+msgstr ""
+
+#: links.py:41
+msgid "Career Service"
+msgstr ""
+
+#: links.py:44
+msgid "Online accounts"
+msgstr ""
+
+#: links.py:46
+msgid "Online Services"
+msgstr ""
+
+#: links.py:47
+msgid "Office 365"
+msgstr ""
+
+#: links.py:48
+msgid "Beep"
+msgstr ""
+
+#: links.py:51
+msgid "Programmes"
+msgstr ""
+
+#: links.py:53
+msgid "Degree Programmes"
+msgstr ""
+
+#: links.py:55
+msgid "Bachelor of Science list"
+msgstr ""
+
+#: links.py:56
+msgid "Master of Science list"
+msgstr ""
+
+#: links.py:57
+msgid "Academic Calendar"
+msgstr ""
+
+#: links.py:60
+msgid "Social"
+msgstr ""
+
+#: links.py:62
+msgid "Facebook Official Page"
+msgstr ""
+
+#: links.py:63
+msgid "Facebook Official Group"
+msgstr ""
+
+#: links.py:73
+msgid "Useful links for Politecnico di Milano:"
+msgstr ""
+
+#: start.py:38
 #, python-format
 msgid ""
 "*Hi %(user)s!*\n"
 "\n"
 "I'm here to help you at Politecnico di Milano,\n"
 "to know what I can do for you just ask for some /help!"
-msgstr ""
-
-#: universitybot/commands/help.py:37
-msgid "search for free classrooms"
-msgstr ""
-
-#: universitybot/commands/help.py:38
-msgid "useful links"
-msgstr ""
-
-#: universitybot/commands/help.py:39
-msgid "list available commands"
-msgstr ""
-
-#: universitybot/commands/help.py:40
-msgid "bot creators"
-msgstr ""
-
-#: universitybot/commands/help.py:46
-msgid "How can I help you?"
-msgstr ""
-
-#: universitybot/commands/credits.py:38
-msgid "I was created by:"
-msgstr ""
-
-#: universitybot/commands/credits.py:40
-msgid ""
-"you can follow him at [https://flavioprimo.xyz/](https://flavioprimo.xyz/)"
-msgstr ""
-
-#: universitybot/commands/credits.py:42
-msgid "you can follow him at [https://paterna.tk/](https://paterna.tk/)"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:78
-msgid "Let's search for free classrooms!"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:78
-msgid "Select start time hour"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:91
-msgid "Select start time minutes"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:104
-msgid "Select end time hour"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:117
-msgid "Select end time minutes"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:130
-msgid "Select day"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:158
-msgid "Free classrooms for *"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:159
-msgid "* from *"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:160
-msgid "* to *"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:161
-msgid "* are:\n"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:168
-msgid "I'm sorry, but it seems like Politecnico has some difficulties"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:171
-msgid ""
-"I'm sorry, but it seems like you didn't enter an end time which is greater "
-"than the start time"
-msgstr ""
-
-#: universitybot/commands/freeclassrooms.py:187
-msgid "Bye! I hope we can talk again some day."
-msgstr ""
-
-#: universitybot/commands/links.py:38
-msgid "Bureaucracy"
-msgstr ""
-
-#: universitybot/commands/links.py:40
-msgid "Registrar's Office"
-msgstr ""
-
-#: universitybot/commands/links.py:41
-msgid "Carrier Service"
-msgstr ""
-
-#: universitybot/commands/links.py:44
-msgid "Online accounts"
-msgstr ""
-
-#: universitybot/commands/links.py:46
-msgid "Online Services"
-msgstr ""
-
-#: universitybot/commands/links.py:47
-msgid "Office 365"
-msgstr ""
-
-#: universitybot/commands/links.py:48
-msgid "Beep"
-msgstr ""
-
-#: universitybot/commands/links.py:51
-msgid "Programmes"
-msgstr ""
-
-#: universitybot/commands/links.py:53
-msgid "Degree Programmes"
-msgstr ""
-
-#: universitybot/commands/links.py:55
-msgid "Bachelor of Science list"
-msgstr ""
-
-#: universitybot/commands/links.py:56
-msgid "Master of Science list"
-msgstr ""
-
-#: universitybot/commands/links.py:57
-msgid "Academic Calendar"
-msgstr ""
-
-#: universitybot/commands/links.py:60
-msgid "Social"
-msgstr ""
-
-#: universitybot/commands/links.py:62
-msgid "Facebook Official Page"
-msgstr ""
-
-#: universitybot/commands/links.py:63
-msgid "Facebook Official Group"
-msgstr ""
-
-#: universitybot/commands/links.py:73
-msgid "Useful links for Politecnico di Milano:"
 msgstr ""

@@ -1,7 +1,6 @@
 .git
 .idea
 conf/conf.json
-Dockerfile
 env
 res
 logs/*

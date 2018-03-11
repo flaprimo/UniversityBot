@@ -82,8 +82,7 @@ def select_classroom(bot, update, user_data):
     classroom_dict = ClassroomInfoProvider.get_campus_classroom(user_data['campus_code'])
 
     for classroom in classroom_dict:
-        if re.sub('\(.*\)', '', classroom['sigla']).replace('_LABORATORIO', '').replace('.', '').lower() == \
-                re.sub('\(.*\)', '', update.message.text).replace('_LABORATORIO', '').replace('.', '').lower():
+        if strip_classroom_name(classroom['sigla']) == strip_classroom_name(update.message.text):
 
             user_data['class_id'] = classroom['id_aula']
 
@@ -92,8 +91,10 @@ def select_classroom(bot, update, user_data):
             update.message.reply_text(_('Classroom found!\nWhat do you want to know?'),
                                       reply_markup=ReplyKeyboardMarkup(reply_keyboard, resize_keyboard=True))
             return CLASSROOM_INFO
+
     logger.warning('{} selected classroom {} that doesn\'t exists'.format(user.first_name, update.message.text))
     update.message.reply_text(_('Classroom not found, try again or /cancel'))
+
     return CLASSROOM_NAME
 
 
@@ -102,20 +103,28 @@ def classroom_details(bot, update, user_data):
     user = update.message.from_user
     option_selected = update.message.text
     logger.info('{} selected {} info'.format(user.first_name, option_selected))
+
     classroom_detail = ClassroomInfoProvider.get_classroom_details(user_data['class_id'])
+
     if option_selected == 'Building':
         update.message.reply_text(_('The Classroom you selected is in ') + classroom_detail['nomeEdificio'] +
                                   _(' at ') + classroom_detail['nomePiano'] + _(' floor.'))
+
     elif option_selected == 'Photo':
         update.message.reply_text(_('Here\'s the photo of the classroom: ') + classroom_detail['url_foto_aula'])
+
     elif option_selected == 'Notes':
         update.message.reply_text(classroom_detail['noteAccessoEdificio'])
+
     elif option_selected == 'Directions':
         access_ways = classroom_detail['percorsiAccesso']
+
         response = ''
         for way in access_ways:
             response += '*' + _('From') + ' {}* \n \t {}\n'.format(way['partenza'], way['descrizione'])
+
         update.message.reply_text(response, parse_mode=ParseMode.MARKDOWN)
+
     else:
         cancel(bot, update, user_data)
         return ConversationHandler.END
@@ -147,3 +156,7 @@ def create_campus_regexp(campuses):
     for campus in campuses:
         campus_regexp = campus_regexp + campus + '|'
     campus_regexp = campus_regexp[:-1] + ')$'
+
+
+def strip_classroom_name(classroom_name):
+    return re.sub('\(.*\)', '', classroom_name).replace('_LABORATORIO', '').replace('.', '').lower()
