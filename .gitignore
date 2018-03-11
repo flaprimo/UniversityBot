@@ -55,6 +55,7 @@ coverage.xml
 
 # User-specific stuff:
 /.idea
+/projectFilesBackup
 
 # CMake
 cmake-build-debug/
