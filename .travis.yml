@@ -37,5 +37,8 @@ after_success:
     docker push $DOCKER_USERNAME/universitybot;
     fi
 
+before_script:
+  - "flake8 ."
+
 script:
   - python -m unittest
