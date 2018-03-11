@@ -1,9 +1,7 @@
 from universitybot.providers.polimi_api import PolimiAPI
 
+
 class ClassroomInfoProvider:
-    """
-    TODO
-    """
 
     @staticmethod
     def get_campuses():
@@ -23,7 +21,6 @@ class ClassroomInfoProvider:
         except:
             raise ConnectionError('Politecnico di Milano server seems not responding')
 
-
     @staticmethod
     def get_campus_classroom(campus):
         try:
@@ -37,4 +34,3 @@ class ClassroomInfoProvider:
             return PolimiAPI.get_dettaglio_aula(class_id)
         except:
             raise ConnectionError('Politecnico di Milano server seems not responding')
-

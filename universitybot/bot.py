@@ -43,7 +43,7 @@ class Bot:
             url_path=self.conf['webproxy']['url_path']          # We use the token
         )
         self.updater.bot.set_webhook(
-            webhook_url=self.conf['webproxy']['url']+'/'+self.conf['webproxy']['url_path'])
+            webhook_url=self.conf['webproxy']['url'] + '/' + self.conf['webproxy']['url_path'])
 
     def _start_webhook(self):
         self.updater.start_webhook(

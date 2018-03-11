@@ -37,8 +37,6 @@ after_success:
     docker push $DOCKER_USERNAME/universitybot;
     fi
 
-before_script:
-  - "flake8 ."
-
 script:
+  - flake8 . --max-line-length=120 --ignore=F821,E722
   - python -m unittest

@@ -50,10 +50,12 @@ def classroominfo(bot, update):
 
     reply_keyboard = list(chunks(campuses_list, 4))
 
-    logger.info("{}[{}] started classroominfo command: {}".format(user.first_name, user['language_code'], update.message.text))
+    logger.info("{}[{}] started classroominfo command: {}".format(user.first_name, user['language_code'],
+                                                                  update.message.text))
 
     update.message.reply_text(_('Select a campus'),
-                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=True))
+                              reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
+                                                               resize_keyboard=True))
 
     return UNIVERSITY_CAMPUS
 

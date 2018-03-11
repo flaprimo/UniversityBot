@@ -16,6 +16,7 @@ class Links:
 
         logger.info("Added /links command to Telegram handler")
 
+
 '''
 COMMAND VARIABLES
 '''
@@ -33,11 +34,12 @@ def links(bot, update):
 
     logger.info("%s[%s] started links command: %s" % (user.first_name, user['language_code'], update.message.text))
 
-    link_list =     [
+    link_list = [
         {
             'category_name': _('Bureaucracy'),
             'links': [
-                (_('Registrar\'s Office'), 'https://www.polimi.it/studenti-iscritti/contatti/sportelli-e-uffici-aperti-agli-studenti/'),
+                (_('Registrar\'s Office'),
+                 'https://www.polimi.it/studenti-iscritti/contatti/sportelli-e-uffici-aperti-agli-studenti/'),
                 (_('Career Service'), 'http://www.careerservice.polimi.it/it-IT/Home/Index/')]
         },
         {

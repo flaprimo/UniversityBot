@@ -1,4 +1,3 @@
-from datetime import datetime
 from universitybot.calls.calls_manager import call
 
 
