@@ -22,6 +22,8 @@ branches:
     - master
 
 before_install:
+  #run tests
+  - python3 -m unittest discover
   # build docker image
   - docker build -t $DOCKER_USERNAME/universitybot .
   # run docker container
