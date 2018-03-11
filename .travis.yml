@@ -2,9 +2,6 @@ sudo: required
 
 language: python
 
-virtualenv:
-  system_site_packages: true
-
 python:
   - 3.6
 
@@ -25,8 +22,6 @@ branches:
     - master
 
 before_install:
-  #run tests
-  - python3 -m unittest discover
   # build docker image
   - docker build -t $DOCKER_USERNAME/universitybot .
   # run docker container
@@ -43,4 +38,4 @@ after_success:
     fi
 
 script:
-  - nosetests
+  - python -m unittest
