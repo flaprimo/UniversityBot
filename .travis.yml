@@ -22,21 +22,26 @@ branches:
     - master
 
 before_install:
-  # build docker image
+  # Update docker
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+  # Build docker image
   - docker build -t $DOCKER_USERNAME/universitybot .
   # run docker container
-  #- mv ./conf/config.example.json ./conf/conf.json
-  #- sed -i "/        \"token\":\"\",/c\        \"token\":\"$TELEGRAM_STAGINGBOT_TOKEN\"," ./conf/conf.json
-  #- docker run -d $DOCKER_USERNAME/universitybot --volume=$TRAVIS_BUILD_DIR/conf:/opt/UniversityBot/conf
-  #- docker ps -a
-  #- docker stats --no-stream
+  - mv ./conf/config.example.json ./conf/config.json
+  - sed -i "/      \"token\":\"123456789:qwertyuiopasdfghjklzxcvbnm123456789\",/c\      \"token\":\"$TELEGRAM_STAGINGBOT_TOKEN\"," ./config/config.json
+  - docker run --name=universitybot -v $TRAVIS_BUILD_DIR/logs:/opt/UniversityBot/logs -v $TRAVIS_BUILD_DIR/cache:/opt/UniversityBot/cache -v $TRAVIS_BUILD_DIR/config:/opt/UniversityBot/config --restart=on-failure:10 $DOCKER_USERNAME/universitybot
+  - docker ps -a
+  - docker stats --no-stream
 
 after_success:
+  # Update online image
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    echo "$DOCKER_PASSWORD" | docker login -u="$DOCKER_USERNAME" --password-stdin;
     docker push $DOCKER_USERNAME/universitybot;
     fi
 
 script:
-  - flake8 . --max-line-length=120 --ignore=F821,E722
-  - python -m unittest
+  - flake8 . --max-line-length=120
