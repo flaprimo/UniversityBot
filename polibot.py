@@ -36,7 +36,7 @@ def read_config():
                 root_logger.debug('Webhook url: ' + config['telegram']['webhook']['url'])
                 root_logger.info('Configuration successfully loaded')
     except FileNotFoundError:
-        root_logger.warning("No config file found! Using default config")
+        root_logger.error("No config file found!")
     finally:
         return config
 
@@ -75,7 +75,7 @@ def main():
         bot = Bot(config['telegram'])
         bot.updater.idle()
     except TypeError:
-        root_logger.critical("No token found! Have you created config.json in bot/config/ ?")
+        root_logger.critical("No token found! Have you created config.json in ./bot/config/ ?")
 
 
 if __name__ == '__main__':
