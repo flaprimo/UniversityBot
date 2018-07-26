@@ -32,7 +32,7 @@ Install `sudo apt install libssl-dev libcurl4-openssl-dev python3-dev` if you wa
     `docker run --volume=/home/$USER/Workspace/UniversityBot:/opt/UniversityBot universitybot`
     * on a production environment would probably be:
     `docker run --name=universitybot --restart=on-failure:10 --volume=/home/$USER/UniversityBot/conf:/opt/UniversityBot/conf universitybot`
-    
+
 ## TODO
 * implement inline
 * implement add arguments to commands
@@ -40,4 +40,4 @@ Install `sudo apt install libssl-dev libcurl4-openssl-dev python3-dev` if you wa
 * implement room occupation, returns classroom occupation based on the day, https://github.com/jarrekk/imgkit
 * webhook
 * run docker image on travis
-* add more translations (Spanish, German, Dutch, Arabic, Portuguese and Korean)
+* add more translations (Italian, Spanish, German, Dutch, Arabic, Portuguese and Korean)

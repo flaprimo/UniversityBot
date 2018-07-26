@@ -1,4 +1,11 @@
-from universitybot.calls.calls_manager import call
+import logging
+import time
+
+import requests
+import requests_cache
+
+logger = logging.getLogger(__name__)
+requests_cache.install_cache(cache_name='cache/cache', backend='sqlite', expire_after=2.628e+6)
 
 
 class PolimiAPI:
@@ -74,7 +81,7 @@ class PolimiAPI:
         ]
 
         """
-        url = PolimiAPI.base_url + 'elencoAule/{}'.format(sede)
+        url = PolimiAPI.base_url + 'elencoAule/%s' % sede
 
         return call(url)
 
@@ -139,7 +146,7 @@ class PolimiAPI:
         ]
 
         """
-        url = PolimiAPI.base_url + 'dettaglioAula/{}'.format(id_aula)
+        url = PolimiAPI.base_url + 'dettaglioAula/%s' % id_aula
 
         return call(url)
 
@@ -175,7 +182,7 @@ class PolimiAPI:
         ]
 
         """
-        url = PolimiAPI.base_url + 'contatti/{}'.format(id_persona)
+        url = PolimiAPI.base_url + 'contatti/%s' % id_persona
 
         return call(url)
 
@@ -229,11 +236,11 @@ class PolimiAPI:
             location (sede) of Politecnico di Milano.
             accepted strings are: 'All', 'COE' Como, 'CRG' Cremona, 'LCF' Lecco, 'MNI' Mantova, 'MIB' Milano Bovisa,
             'MIA' Milano Leonardo, 'PCL' Piacenza
-        date : datetime
+        date : # TODO add type
             the day to search for free classrooms
-        start_time : datetime
+        start_time : # TODO add type
             the start time to search for free classrooms
-        end_time : datetime
+        end_time : # TODO add type
             the end time to search for free classrooms
         Returns
         -------
@@ -261,10 +268,12 @@ class PolimiAPI:
            [...]
         ]
         """
-        url = PolimiAPI.base_url + 'elencoAule/{}'.format(sede)
+        url = PolimiAPI.base_url + 'elencoAule/%s' % sede
 
-        payload = 'soloAuleLibere={}&dalleAulaLibera={}&alleAulaLibera={}&dataAulaLibera={}' \
-            .format('S', start_time.strftime('%H:%M'), end_time.strftime('%H:%M'), date.strftime('%d/%m/%Y'))
+        payload = {'soloAuleLibere': 'S',
+                   'dalleAulaLibera': start_time.isoformat(timespec='minutes'),
+                   'alleAulaLibera': end_time.isoformat(timespec='minutes'),
+                   'dataAulaLibera': time.strftime('%d/%m/%Y', date.timetuple())}
 
         return call(url, payload)
 
@@ -306,7 +315,7 @@ class PolimiAPI:
         ]
 
         """
-        url = PolimiAPI.base_url + 'elencoServiziShell/{}'.format(matricola)
+        url = PolimiAPI.base_url + 'elencoServiziShell/%s' % matricola
 
         return call(url)
 
@@ -328,6 +337,39 @@ class PolimiAPI:
             unknown
 
         """
-        url = PolimiAPI.base_url + 'docente/{}/foto/'.format(id_persona)
+        url = PolimiAPI.base_url + 'docente/%s/foto/' % id_persona
 
         return call(url)
+
+    @staticmethod
+    def get_photo(name, url):
+        """
+        Downloads a photo from the given url, despite not beign an official polimi api it's used to download polimi
+        photo
+
+        :param name: str
+            name of the file
+        :param url: str
+            url pointing to the photo
+        :return:
+        """
+        local_filename = 'cache/' + str(name) + '.png'
+        r = requests.get(url, stream=True)
+        with open(local_filename, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=1024):
+                if chunk:
+                    f.write(chunk)
+
+        return local_filename
+
+
+def call(url, payload=None):
+    logger.debug('Handle API call for: %s' % url)
+    logger.debug('Payload: %s' % payload)
+
+    r = requests.get(url, params=payload)
+
+    logger.debug('From cache: %s' % r.from_cache)
+    logger.debug('Response code: %s' % r.status_code)
+
+    return r.json()
