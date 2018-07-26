@@ -14,4 +14,4 @@ RUN pip3 install -r requirements.txt
 VOLUME ["/opt/UniversityBot/logs", "opt/UniversityBot/cache"]
 
 # run application
-CMD ["/usr/bin/python3", "/opt/UniversityBot/universitybot/polibot.py"]
+CMD ["/usr/bin/python3", "/opt/UniversityBot/polibot.py"]
