@@ -10,8 +10,5 @@ WORKDIR /opt/UniversityBot
 COPY . ./
 RUN pip3 install -r requirements.txt
 
-# set volume
-VOLUME ["/opt/UniversityBot/logs", "opt/UniversityBot/cache"]
-
 # run application
 CMD ["/usr/bin/python3", "/opt/UniversityBot/polibot.py"]
