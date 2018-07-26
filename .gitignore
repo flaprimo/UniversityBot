@@ -1,7 +1,6 @@
 .idea/
 venv/
 logs/*
-bot/config/config.json
+config/config.json
 cache/*
 __pycache__/
-test.py

@@ -21,7 +21,7 @@ def read_config():
     config = None
 
     try:
-        with open('bot/config/config.json') as f:
+        with open('config/config.json') as f:
             config = json.load(f)
             if config['telegram']['token'] is not '':
                 root_logger.debug('Token: ' + config['telegram']['token'])
