@@ -4,3 +4,4 @@ logs/*
 bot/config/config.json
 cache/*
 __pycache__/
+test.py

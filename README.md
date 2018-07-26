@@ -11,7 +11,7 @@ Use it to find information about halls, free classrooms and useful links.
 * searches for free classrooms
 
 ### Technologies
-* in memory cache requests for api calls for faster response
+* file cache requests for api calls for faster response
 * deployment using [docker](https://www.docker.com/)
 * multi-language support through the [gettext](https://www.gnu.org/software/gettext/) standard
 * use of the tested and reliable [Python Telegram Bot](https://github.com/python-telegram-bot/python-telegram-bot) framework
@@ -34,10 +34,10 @@ Install `sudo apt install libssl-dev libcurl4-openssl-dev python3-dev` if you wa
     `docker run --name=universitybot --restart=on-failure:10 --volume=/home/$USER/UniversityBot/conf:/opt/UniversityBot/conf universitybot`
 
 ## TODO
-* implement inline
-* implement add arguments to commands
-* implement occupation, returns html of the occupation of the day
-* implement room occupation, returns classroom occupation based on the day, https://github.com/jarrekk/imgkit
-* webhook
-* run docker image on travis
-* add more translations (Italian, Spanish, German, Dutch, Arabic, Portuguese and Korean)
+- [ ] implement inline
+- [ ] implement add arguments to commands
+- [ ] implement occupation, returns html of the occupation of the day
+- [ ] implement room occupation, returns classroom occupation based on the day, https://github.com/jarrekk/imgkit
+- [ ] webhook
+- [ ] run docker image on travis
+- [ ] add more translations (Spanish, German, Dutch, Arabic, Portuguese and Korean)

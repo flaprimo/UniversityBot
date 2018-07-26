@@ -24,7 +24,7 @@ class Credits:
 
         logger.debug('%s[%s] started info command: %s' % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = translation.gettext('I was created by:\n\n[Flavio Primo](https://t.me/flaprimo) - you can follow him '
                                     'at [https://flavioprimo.xyz/](https://flavioprimo.xyz/)\n[Paolo Paterna]('

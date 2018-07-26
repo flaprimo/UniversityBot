@@ -24,7 +24,7 @@ class Links:
 
         logger.debug('%s[%s] started links command: %s' % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         link_list = [
             {

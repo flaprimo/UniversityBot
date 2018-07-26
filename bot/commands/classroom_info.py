@@ -64,7 +64,7 @@ class ClassroomInfo:
         logger.debug("%s[%s] started classroominfo command: %s" % (user.first_name, user['language_code'],
                                                                    update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = translation.gettext('Select a campus')
 
@@ -81,7 +81,7 @@ class ClassroomInfo:
 
         logger.debug('%s[%s] selected campus %s' % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         for campus in campuses_codes:
             if campuses_codes[campus] == update.message.text:
@@ -98,7 +98,7 @@ class ClassroomInfo:
 
         logger.debug('%s[%s] selected classroom %s' % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         try:
             classroom_dict = PolimiAPI.get_elenco_aule(user_data['campus_code'])
@@ -131,7 +131,7 @@ class ClassroomInfo:
         option_selected = update.message.text
         logger.debug('%s[%s] selected %s info' % (user.first_name, user['language_code'], option_selected))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = ''
 
@@ -177,7 +177,7 @@ class ClassroomInfo:
 
         logger.debug("%s[%s canceled command: %s" % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = translation.gettext('Bye! I hope we can talk again some day.')
 

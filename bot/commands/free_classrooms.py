@@ -71,7 +71,7 @@ class FreeClassrooms:
         logger.debug("%s[%s] started freeclassroom command: %s" %
                      (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = translation.gettext('Let\'s search for free classrooms!\n\nSelect start time hour')
         reply_keyboard = ReplyKeyboardMarkup(hour_keyboard, one_time_keyboard=True, resize_keyboard=True)
@@ -87,7 +87,7 @@ class FreeClassrooms:
 
         logger.debug("%s[%s] added starttime_hour: %s" % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = translation.gettext('Select start time minutes')
         reply_keyboard = ReplyKeyboardMarkup(minute_keyboard, one_time_keyboard=True, resize_keyboard=True)
@@ -103,7 +103,7 @@ class FreeClassrooms:
 
         logger.debug("%s[%s] added starttime_min: %s" % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = translation.gettext('Select end time hour')
         reply_keyboard = ReplyKeyboardMarkup(hour_keyboard, one_time_keyboard=True, resize_keyboard=True)
@@ -119,7 +119,7 @@ class FreeClassrooms:
 
         logger.debug("%s[%s] added endtime_hour: %s" % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = translation.gettext('Select end time minutes')
         reply_keyboard = ReplyKeyboardMarkup(minute_keyboard, one_time_keyboard=True, resize_keyboard=True)
@@ -135,7 +135,7 @@ class FreeClassrooms:
 
         logger.debug("%s[%s] added endtime_min: %s" % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = translation.gettext('Select day')
         reply_keyboard = ReplyKeyboardMarkup(day_keyboard, one_time_keyboard=True, resize_keyboard=True)
@@ -160,7 +160,7 @@ class FreeClassrooms:
 
         logger.debug("%s[%s] added day: %s" % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         if end_time > start_time:
 
@@ -218,7 +218,7 @@ class FreeClassrooms:
 
         logger.debug("%s[%s canceled command: %s" % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = translation.gettext('Bye! I hope we can talk again some day.')
 

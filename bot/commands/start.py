@@ -24,7 +24,7 @@ class Start:
 
         logger.debug("%s[%s] started start command: %s" % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         reply = (translation.gettext('*Hi %s!*\n\nI\'m here to help you at Politecnico di Milano, to know what I can '
                                      'do for you just ask for some /help!') % user.first_name)

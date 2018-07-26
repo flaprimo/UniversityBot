@@ -24,7 +24,7 @@ class Help:
 
         logger.debug('%s[%s] started help command: %s' % (user.first_name, user['language_code'], update.message.text))
 
-        translation = gettext.translation('strings', '../locale', languages=[user['language_code']], fallback=True)
+        translation = gettext.translation('strings', 'bot/locale', languages=[user['language_code']], fallback=True)
 
         command_list = [
             ('/classroominfo', translation.gettext('get classroom info (building, photo, notes, directions)')),
