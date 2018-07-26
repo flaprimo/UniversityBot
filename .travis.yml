@@ -25,7 +25,7 @@ before_install:
   # build docker image
   - docker build -t $DOCKER_USERNAME/universitybot .
   # run docker container
-  #- mv ./conf/conf.example.json ./conf/conf.json
+  #- mv ./conf/config.example.json ./conf/conf.json
   #- sed -i "/        \"token\":\"\",/c\        \"token\":\"$TELEGRAM_STAGINGBOT_TOKEN\"," ./conf/conf.json
   #- docker run -d $DOCKER_USERNAME/universitybot --volume=$TRAVIS_BUILD_DIR/conf:/opt/UniversityBot/conf
   #- docker ps -a

@@ -71,8 +71,11 @@ def main():
 
     config = read_config()
 
-    bot = Bot(config['telegram'])
-    bot.updater.idle()
+    try:
+        bot = Bot(config['telegram'])
+        bot.updater.idle()
+    except TypeError:
+        root_logger.critical("No token found! Have you created config.json in bot/config/ ?")
 
 
 if __name__ == '__main__':
