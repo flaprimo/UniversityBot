@@ -71,8 +71,6 @@ def main():
 
     config = read_config()
 
-    root_logger.info(config['telegram']['token'])
-
     try:
         bot = Bot(config['telegram'])
         bot.updater.idle()
