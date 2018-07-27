@@ -32,7 +32,7 @@ before_install:
   # run docker container
   - mv ./config/config.example.json ./config/config.json
   - sed -i "s/123456789:qwertyuiopasdfghjklzxcvbnm123456789/$TELEGRAM_STAGINGBOT_TOKEN/g" config/config.json
-  - docker run --name=universitybot -v $TRAVIS_BUILD_DIR/logs:/opt/UniversityBot/logs -v $TRAVIS_BUILD_DIR/cache:/opt/UniversityBot/cache -v $TRAVIS_BUILD_DIR/config:/opt/UniversityBot/config --restart=on-failure:10 $DOCKER_USERNAME/universitybot
+  - docker run -d --name=universitybot -v $TRAVIS_BUILD_DIR/logs:/opt/UniversityBot/logs -v $TRAVIS_BUILD_DIR/cache:/opt/UniversityBot/cache -v $TRAVIS_BUILD_DIR/config:/opt/UniversityBot/config --restart=on-failure:10 $DOCKER_USERNAME/universitybot
   - docker ps -a
   - docker stats --no-stream
 
