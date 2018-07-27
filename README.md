@@ -27,7 +27,7 @@ Use it to find information about halls, free classrooms and useful links.
 3. If you cloned in /opt/ just run `docker_install.sh` and **you're done** (if you stop the container just run `docker_run.sh` to restart it), else continue reading
 4. open a terminal into project folder and build the docker image with `docker build -t universitybot .`
 5. run the docker image with:
-    `docker run --name=universitybot -v installdir/logs:/opt/UniversityBot/logs -v installdir/cache:/opt/UniversityBot/cache -v installdir/config:/opt/UniversityBot/config --restart=on-failure:10 universitybot`
+    `docker run -d --name=universitybot -v installdir/logs:/opt/UniversityBot/logs -v installdir/cache:/opt/UniversityBot/cache -v installdir/config:/opt/UniversityBot/config --restart=on-failure:10 universitybot`
 
 ## TODO
 - [ ] implement inline
