@@ -35,5 +35,5 @@ Use it to find information about halls, free classrooms and useful links.
 - [ ] implement occupation, returns html of the occupation of the day
 - [ ] implement room occupation, returns classroom occupation based on the day, https://github.com/jarrekk/imgkit
 - [ ] webhook
-- [ ] run docker image on travis
+- [x] run docker image on travis
 - [ ] add more translations (Spanish, German, Dutch, Arabic, Portuguese and Korean)
