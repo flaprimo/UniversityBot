@@ -1,6 +1,6 @@
 {
     "telegram":{
-        "token":"",
+      "token": "123456789:qwertyuiopasdfghjklzxcvbnm123456789",
         "connection":"polling",
         "webhook":{
             "ip":"",
