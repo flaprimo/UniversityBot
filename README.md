@@ -37,3 +37,4 @@ Use it to find information about halls, free classrooms and useful links.
 - [ ] webhook
 - [x] run docker image on travis
 - [ ] add more translations (Spanish, German, Dutch, Arabic, Portuguese and Korean)
+- [ ] update framework to latest version
